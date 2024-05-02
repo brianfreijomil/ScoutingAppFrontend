@@ -1,0 +1,69 @@
+<mat-dialog-content color class="modal-users-cont">
+
+    <div class="cont-main-modal">
+        <div class="options-modal-cont">
+            <h2 class="title-modal">{{titleAction}} jugador</h2>
+            <div mat-dialog-close class="icon-container icon-close">
+                <img src="/assets/images/cancel_96921.svg" alt="close-modal-icon-svg">
+            </div>
+        </div>
+        <div class="sub-titles-form-cont">
+            <h4>Informacion personal</h4>
+            <h4>Informacion deportiva</h4>
+            <h4>Informacion de visoria</h4>
+        </div>
+        <form [formGroup]="formPlayer" class="form-edit-player-cont">
+            <div class="form-part form-part-1">
+                <label for="inputSurnmae">Apellido*</label>
+                <input id="inputSurnmae" type="text">
+                <label for="inputName">Nombre*</label>
+                <input id="inputName" type="text">
+                <label for="inputDNI">Dni*</label>
+                <input id="inputDNI" type="text">
+                <label for="inputCategory">Categoria*</label>
+                <input id="inputCategory" type="text">
+                <label for="inputHeight">Altura</label>
+                <input id="inputHeight" type="text">
+
+                <label for="inputUbic">Ubicacion*</label>
+                <input id="inputUbic" type="text">
+                <label for="inputContact">Contacto*</label>
+                <input id="inputContact" type="text">
+            </div>
+            <div class="form-part form-part-2">
+                <label for="inputStatus">Estado*</label>
+                <select name="" id="inputStatus">
+                    <option value="Fichado">Fichado</option>
+                    <option value="Observado">Observado</option>
+                </select>
+                <label for="inputSkillLeg">Pie habil</label>
+                <input id="inputSkillLeg" type="text">
+                <label for="inputFirstPos">Puesto principal*</label>
+                <input id="inputFirstPos" type="text">
+                <label for="inputSecondPos">Puesto secundario</label>
+                <input id="inputSecondPos" type="text">
+                <label for="inputValoration">Valoracion</label>
+                <input id="inputValoration" type="text">
+                <label for="characteristics">Caracteristicas</label>
+                <textarea></textarea>
+            </div>
+            <div class="form-part form-part-3">
+                <label for="inputDate">Fecha*</label>
+                <input id="inputDate" type="date">
+                <label for="inputTime">Hora</label>
+                <input id="inputTime" type="time">
+                <label for="inputDivision">Division (prueba)</label>
+                <input id="inputDivision" type="text">
+                <label for="inputStadiumTeam">Cancha (club)</label>
+                <input id="inputStadiumTeam" type="text">
+                <label for="inputContactTeam">contacto (club)</label>
+                <input id="inputContactTeam" type="text">
+            </div>
+            <div class="form-part form-part-4">
+                <button mat-dialog-close class="btn-form btn-confirm">{{btnAction}}</button>
+                <button mat-dialog-close class="btn-form btn-cancel">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+</mat-dialog-content>

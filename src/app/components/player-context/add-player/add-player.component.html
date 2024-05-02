@@ -1,0 +1,112 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="main-content">
+            <div class="sub-header-cont">
+                <h2 class="title-section">Jugadores | Captacion</h2>
+            </div>
+            <div class="add-players-cont">
+                <div class="important-cont add-players-part1" *ngIf="addPlayersPart1">
+                    <h3 class="title-important-cont">AGREGAR JUGADORES | LOGISTICA</h3>
+                    <div class="form-logistics">
+                        <div class="form-logistics-part1 form-part">
+                            <div class="item-form-logistics">
+                                <label for="">Fecha</label>
+                                <input class="input-date-time" type="date">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Hora</label>
+                                <input class="input-date-time" type="time">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Division/Categoria</label>
+                                <input type="text" placeholder="categoria">
+                            </div>
+                        </div>
+                        <div class="form-logistics-part2 form-part">
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Club</label>
+                                <input type="text" placeholder="club">
+                            </div>
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Cancha/Estadio</label>
+                                <input type="text" placeholder="cancha">
+                            </div>
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Contacto</label>
+                                <input type="text" placeholder="telefono.., red social..">
+                            </div>
+                        </div>
+                    </div>
+                    <article class="btns-form-add-player-cont">
+                        <button (click)="viewSecondPartAddPlayers()" class="btn-next">Siguiente</button>
+                        <button [routerLink]="''" class="btn-cancel">Volver al menu</button>
+                    </article>
+                </div>
+        
+        
+                <div class="important-cont add-players-part2" *ngIf="!addPlayersPart1">
+                    <h3 class="title-important-cont">AGREGAR JUGADORES | INFORMACION PERSONAL</h3>
+                    <div class="form-logistics form-scroll">
+                        <div class="form-logistics-part1 form-part">
+                            <div class="item-form-logistics">
+                                <label for="">Apellido</label>
+                                <input type="text" placeholder="apellido">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Nombre</label>
+                                <input type="text" placeholder="nombre">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Categoria</label>
+                                <input type="text" placeholder="categoria">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Contacto</label>
+                                <input type="text" placeholder="telefono, red social...">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Documento</label>
+                                <input type="text" placeholder="documento">
+                            </div>
+                            <div class="item-form-logistics">
+                                <label for="">Ubicacion</label>
+                                <input type="text" placeholder="ubicacion">
+                            </div>
+                        </div>
+                        <div class="form-logistics-part2 form-part">
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Puesto principal</label>
+                                <input type="text" placeholder="arquero, vol...">
+                            </div>
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Puesto secundario</label>
+                                <input type="text" placeholder="delantero, def...">
+                            </div>
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Valoracion</label>
+                                <input type="text" placeholder="A,B,C...">
+                            </div>
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Caracteristicas</label>
+                                <input type="text" placeholder="caracteristicas">
+                            </div>
+                            <div class="item-form-logistics item-f-2">
+                                <label for="">Foto</label>
+                                <div class="box-upload-image">
+                                    <label class="lbl-player-image" for="playerImage">Subir foto del jugador (opcional)</label>
+                                </div>
+                                <input class="input-player-image" type="file" id="playerImage" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    <article class="btns-form-add-player-cont btns-part-2">
+                        <button (click)="createPlayer()" class="btn-next">Finalizar registro</button>
+                        <button (click)="viewFirstPartAddPlayers()" class="btn-cancel">Volver a logistica</button>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

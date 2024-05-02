@@ -1,0 +1,33 @@
+<mat-dialog-content color class="modal-calendar-cont" style="padding: 20px 24px;">
+    <div class="cont-event-create">
+        <div class="options-modal-cont">
+            <h2 class="title-event">{{titleAction}} evento</h2>
+            <div mat-dialog-close class="icon-container icon-close">
+                <img src="/assets/images/cancel_96921.svg" alt="close-modal-icon-svg">
+            </div>
+        </div>
+        <div class="cont-form">
+            <form [formGroup]="formEvent">
+                <label for="title">Titulo</label>
+                <input type="text" formControlName="title">
+
+                <label for="dateInit">Desde</label>
+                <input type="date" formControlName="dateInit">
+
+                <label for="dateEnd">Hasta</label>
+                <input type="date" formControlName="dateEnd">
+
+                <label for="description">Descripcion</label>
+                <textarea formControlName="description"></textarea>
+
+                <div class="form-buttons-cont">
+                    <button class="btn-form btn-confirm" [disabled]="formEvent.invalid" (click)="saveEvent()">
+                        {{btnAction}}
+                    </button>
+                    <button class="btn-form btn-cancel" mat-dialog-close>Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</mat-dialog-content>

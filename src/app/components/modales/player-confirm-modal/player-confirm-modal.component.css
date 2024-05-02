@@ -1,0 +1,129 @@
+.modal-player-confirm-cont {
+    color: rgba(50, 50, 50, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif !important;
+    background-color: #D9D9D9;
+    width: 65vw;
+    height: 80vh;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.shadow-modal {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.557);
+}
+
+/*GRID CONTAINER INIT*/
+
+.item1-modal {grid-area: image;}
+.item2-modal {grid-area: data;}
+.item3-modal {grid-area: crct;}
+.item4-modal {grid-area: btns;}
+
+  
+.modal-grid-container {
+    padding-top: 10px;
+    display: grid;
+    grid-template-columns: 14vw 14vw 14vw 14vw;
+    grid-template-rows: 25vh 24vh 10vh ;
+    column-gap: 1vw;
+    row-gap: 1vh;
+    grid-template-areas: 
+    "image data data data"
+    "crct crct crct crct"
+    "btns btns btns btns";
+}
+
+/*GRID CONTAINER END*/
+
+.img-player-uploaded-modal {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.data-important-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.info-modal ul {
+ padding: 0;
+ margin: 0;
+ list-style: none;
+ font-weight: 500;
+ font-size: 0.9vw;
+ height: 80%;
+ line-height: 2;
+}
+
+.info-modal ul li {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.caract-player-modal {
+    height: 100%;
+    width: 100%;
+}
+
+.caract-player-modal h2 {
+    margin: 1% 0 1% 0;
+    font-size: 1.3vw;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.caract-player-modal p {
+    font-weight: 500;
+    font-size: 1.1vw;
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.btns-modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-modal {
+    width: 30%;
+    height: 60%;
+    border-radius: 8px;
+    margin: 0 2.5%;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.285);
+    transition: 0.7s;
+}
+.btn-modal:hover {
+    box-shadow: inset 0 0 2px 2px #640808;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.801);
+}
+
+.btn-confirm {
+    background-color: #313030;
+    border: #313030;
+} 
+
+.btn-cancel {
+    background-color: rgba(237, 27, 46, 0.8);
+    border: rgba(237, 27, 46, 0.8);
+}

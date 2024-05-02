@@ -1,0 +1,59 @@
+
+
+.cont-main-modal {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont-main-modal h2 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.photo-cont {
+    width: 75%;
+    background-color: #acacac;
+    border-radius: 8px;
+    margin-bottom: 5%;
+}
+
+.photo-cont .img-default {
+    width: 100%;
+    height: auto;
+    filter: invert();
+    border-radius: 8px;
+}
+
+.box-upload-image {
+    width: 75%;
+    height: 6vh;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #313030;
+    border: #313030;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.285);
+    transition: 0.7s;
+}
+
+.box-upload-image label{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-upload-image:hover {
+    box-shadow: inset 0 0 4px 4px #000000;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.977);
+}
+
+.input-player-image {
+    display: none;
+}

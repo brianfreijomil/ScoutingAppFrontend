@@ -1,0 +1,63 @@
+
+
+.cont-main-modal {
+    width: 45vw;
+}
+
+.sub-header-modal {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-header-modal h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6vw;
+}
+
+.btn-close-cont {
+    width: 2vw;
+}
+
+.btn-close-cont img {
+    width: 100%;
+    height: auto;
+    filter: invert(0.30);
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+.btn-close-cont img:hover {
+    filter: invert(0);
+}
+
+.title-date-report-cont {
+    display: flex;
+    margin-bottom: 5vh;
+    align-items: start;
+}
+
+.title-report {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3vw;
+    margin: 0;
+    margin-right: 2vw;
+
+}
+
+.date-report {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3vw;
+    font-weight: 600;
+    margin: 0;
+}
+
+.report-cont {
+    width: 100%;
+}
+
+.report-cont p {
+    color: #333333;
+    font-size: 1vw;
+    line-height: 1.2;
+    font-weight: 500;
+}

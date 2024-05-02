@@ -1,0 +1,251 @@
+* {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #D9D9D9;
+}
+
+.body-contain {
+    background-image: url("/assets/images/back-page.svg");
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+app-menu-page {
+    width: 20%;
+}
+
+.page-main-contain {
+    width: 80%;
+}
+
+.section-map-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+    color: #D9D9D9;
+}
+
+.main-contain {
+    height: 87vh;
+    width: 98%;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ------- SCROLL STYLE  ------*/
+.cont-scroll {
+    width: 100%;
+    height: 95%;
+    overflow-y: auto;
+}
+
+.cont-scroll::-webkit-scrollbar {
+    width: 7px;
+}
+.cont-scroll::-webkit-scrollbar-thumb {
+    background: #d9d9d96b;
+    border-radius: 8px;
+}
+.cont-scroll::-webkit-scrollbar-thumb:hover {
+    background: #d9d9d9bd;
+}
+
+/* ----------- SECTION MAP -----------*/
+
+.section-map {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title-cont {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-title-cont h2 {
+    margin: 0;
+    margin-left: 1.5vw;
+    font-size: 1.6vw;
+    font-weight: 400;
+}
+
+.section-title-cont p {
+    padding: 0;
+    margin: 0;
+    margin-right: 1.5vw;
+    font-size: 1.1vw;
+    font-weight: 500;
+}
+.section-title-cont p:hover {
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+
+.map-container {
+    background-image: url("/assets/images/mapa_argentina_division_politica.jpg");
+    background-size: cover;
+    filter:opacity(0.5);
+    width: 96%;
+    height: 70vh;
+}
+/* 
+.map-container img {
+    width: 100%;
+    height: 100%;
+} */
+
+
+/*------------SECTION STATS----------*/
+
+.section-stats {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-stats {
+    margin-top: 0vh;
+    width: 96%;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    height: 7vh;
+    margin-bottom: 5vh;
+}
+
+.nav-stats ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-stats ul li {
+    height: 80%;
+    width: 30%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-stats ul li p{
+    color: rgba(50, 50, 50, 1);
+    margin: 0;
+    padding: 0;
+    font-size: 1.2vw;
+    font-weight: 600;
+    height: 100%;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.nav-stats ul li p:hover {
+    background-color: rgb(31, 31, 31);
+    color: rgb(217, 217, 217) !important;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.779);
+}
+
+.stats-table-bonus-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+}
+
+.back-table-cont {
+    width: 70%;
+}
+
+table {
+    width: 100%;
+}
+
+table th,td,tr {
+    color: rgba(50, 50, 50, 1) !important;
+}
+
+.bonus-cont {
+    width: 28%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.bonus-part {
+    width: 100%;
+    display: flex;
+}
+
+.totals-stats ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.totals-stats ul li {
+    font-size: 1.1vw;
+    font-weight: bold;
+    margin: 1vh 0 1vh 0;
+    padding: 0;
+}
+
+.totals-stats ul li span {
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: rgba(237, 27, 46, 1);
+}
+
+.divisor-line {
+    width: 100%;
+    height: 0.1vh;
+    background-color: #D9D9D9;
+    margin: 5vh 0 5vh 0;
+}
+
+.avg-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avg-stats p {
+    margin: 0;
+    padding: 0;
+    width: 48%;
+    font-size: 1.1vw;
+    font-weight: bold;
+}
+
+.avg-stats p.avg-p {
+    font-size: 3.8vw !important;
+    color: rgba(237, 27, 46, 1);
+}
+
+tr.mat-mdc-row {
+    height: 7vh !important;
+}
+
+
+tr.mat-mdc-header-row {
+    height: 8vh !important;
+}

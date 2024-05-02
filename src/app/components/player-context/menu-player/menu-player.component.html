@@ -1,0 +1,25 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="main-content">
+            <div class="sub-header-cont">
+                <h2 class="title-section">Jugadores</h2>
+            </div>
+            <div class="menu-players-cont">
+                <article [routerLink]="'search'" class="article-menu-player a-m-p-1">
+                    <p class="text-option-menu-player">BUSCAR JUGADORES</p>
+                    <div>
+                        <img class="icon-option-menu-player" src="/assets/images/3844432-magnifier-search-zoom_110300.svg" alt="icon-search-svg">
+                    </div>
+                </article>
+                <article [routerLink]="'catchment'" class="article-menu-player a-m-p-2">
+                    <p class="text-option-menu-player">AGREGAR JUGADORES</p>
+                    <div>
+                        <img class="icon-option-menu-player" src="/assets/images/1491254405-plusaddmoredetail_82972.svg" alt="icon-plus-svg">
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</div>

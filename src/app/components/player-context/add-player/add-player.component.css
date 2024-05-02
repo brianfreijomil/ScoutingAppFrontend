@@ -1,0 +1,216 @@
+* {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.body-contain {
+    background-image: url("/assets/images/back-page.svg");
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+app-menu-page {
+    width: 20%;
+}
+
+.page-main-contain {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content {
+    height: 87vh;
+    width: 98%;
+    background-color: rgba(30, 30, 30, 0.7);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub-header-cont {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+h2.title-section {
+    margin: 0;
+    margin-left: 1.5vw;
+    font-size: 1.6vw;
+    font-weight: 400;
+    color: #D9D9D9;
+}
+
+.add-players-cont {
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+/*--------------------------------- ADD PLAYERS SECTION--------------------------------------------------*/
+
+.important-cont {
+    height: 75vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-important-cont {
+    font-weight: 500;
+    font-size: 1.6vw;
+    color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 8vh;
+    background-color: #ababab16;
+    margin: 0;
+}
+
+.form-logistics {
+    display: flex; 
+    justify-content: center;
+    width: 95%;
+    height: 57vh;
+}
+
+.form-part {
+    width: 45%;
+}
+
+/* .form-logistics-part1 {
+
+}
+
+.form-logistics-part2 {
+    
+} */
+
+.item-form-logistics {
+    width: 30vw !important;
+    height: 9vh;
+    margin: 5% 0 5% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-f-2 {
+    /*ajusto inputs del lado derecho para que tengan la misma distancia al borde del cont que los inputs izq*/
+    align-items: end !important;
+}
+
+.item-form-logistics input {
+    width: 85%;
+    height: 5vh !important;
+    border: #D9D9D9;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    font-size: 1vw;
+}
+
+
+
+
+.item-form-logistics label {
+    width: 85%;
+    margin-bottom: 1%;
+    font-size: 1.1vw;
+    color: #D9D9D9;
+}
+
+.btns-form-add-player-cont {
+    width: 50%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btns-form-add-player-cont button {
+    width: 45%;
+    height: 5.5vh;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1vw;
+    cursor: pointer;
+}
+
+.btn-next {
+    background-color: rgba(118, 116, 116, 0.7);
+    border: rgba(172, 172, 172, 0.7);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.7s;
+}
+.btn-next:hover {
+    background-color: rgba(143, 143, 143, 0.7);
+    border: solid 1px rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0 0 2px 2px #ababab;
+    box-shadow: 0px 0px 10px rgba(249, 249, 249, 0.5);
+}
+
+.btn-cancel {
+    background-color: rgba(237, 27, 46, 0.7);
+    border: rgba(237, 27, 46, 0.7);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.7s;
+}
+.btn-cancel:hover {
+    background-color: rgba(235, 0, 20, 0.7);
+    border: solid 1px rgba(235, 0, 20, 0.7);
+    box-shadow: inset 0 0 2px 2px #640808;
+    box-shadow: 0px 0px 10px rgba(243, 181, 181, 0.5);
+}
+
+/* ADD PLAYERS PART 2 (PERSONAL AND SPORT) */
+
+.form-scroll {
+    overflow-y: scroll !important;
+}
+
+.form-scroll::-webkit-scrollbar {
+    width: 7px;
+}
+
+.form-scroll::-webkit-scrollbar-thumb {
+    background: #d9d9d96b;
+    border-radius: 8px;
+}
+.form-scroll::-webkit-scrollbar-thumb:hover {
+    background: #d9d9d9bd;
+}
+
+.input-player-image{ 
+    display: none;
+}
+
+.box-upload-image {
+    width: 86%;
+    height: 50%;
+    border-radius: 8px;
+    background-color: #D9D9D9;
+    color: rgba(0, 0, 0, 0.879);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lbl-player-image {
+    padding: 0;
+    margin: 0;
+    width: 100% !important;
+    text-align: center;
+    cursor: pointer;
+}

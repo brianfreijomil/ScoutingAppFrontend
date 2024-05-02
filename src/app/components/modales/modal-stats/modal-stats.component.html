@@ -1,0 +1,33 @@
+<mat-dialog-content color class="modal-users-cont">
+
+    <div class="cont-main-modal">
+        <div class="options-modal-cont">
+            <h2 class="title-modal">{{titleAction}} estadisticas</h2>
+            <div mat-dialog-close class="icon-container icon-close">
+                <img src="/assets/images/cancel_96921.svg" alt="close-modal-icon-svg">
+            </div>
+        </div>
+
+        <form [formGroup]="formStats" class="form-stats-player-cont">
+            <label for="inputDate">Fecha*</label>
+            <input value="fechaPredeterminada" id="inputDate" type="date">
+            <label for="inputMatches">Partidos</label>
+            <input value="0" id="inputMatches" type="number">
+            <label for="inputMinutes">Minutos jugados</label>
+            <input value="0" id="inputMinutes" type="number">
+            <label for="inputScores">Goles*</label>
+            <input value="0" id="inputScores" type="number">
+            <label for="inputAssists">Asistencias</label>
+            <input value="0" id="inputAssists" type="number">
+            <label for="inputYellowCards">Tarjetas Amarillas</label>
+            <input value="0" id="inputYellowCards" type="number">
+            <label for="inputRedCards">Tarjetas Rojas</label>
+            <input value="0" id="inputRedCards" type="number">
+            
+            <div class="form-buttons-cont">
+                <button mat-dialog-close class="btn-form btn-confirm">{{btnAction}}</button>
+                <button mat-dialog-close class="btn-form btn-cancel">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>

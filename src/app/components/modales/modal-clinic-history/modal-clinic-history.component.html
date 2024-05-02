@@ -1,0 +1,31 @@
+<mat-dialog-content color class="modal-clinic-history-cont">
+
+    <div class="cont-main-modal">
+        <div class="options-modal-cont">
+            <h2 class="title-modal">{{titleAction}} reporte</h2>
+            <div mat-dialog-close class="icon-container icon-close">
+                <img src="/assets/images/cancel_96921.svg" alt="close-modal-icon-svg">
+            </div>
+        </div>
+        <form [formGroup]="formClinicHistory" class="form-clinic-history-player-cont">
+            <div class="form-part">
+                <div class="sub-part-form">
+                    <label for="inputTitle">Title*</label>
+                    <input id="inputTitle" type="text">
+                </div>
+                <div class="sub-part-form">
+                    <label for="inputDate">Fecha*</label>
+                    <input value="fechaPredeterminada" id="inputDate" type="date">
+                </div>
+            </div>
+            <label for="inputReport">Reporte*</label>
+            <textarea id="inputReport"></textarea>
+            <div class="form-buttons-cont">
+                <button mat-dialog-close class="btn-form btn-confirm">{{btnAction}}</button>
+                <button mat-dialog-close class="btn-form btn-cancel">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+
+</mat-dialog-content>

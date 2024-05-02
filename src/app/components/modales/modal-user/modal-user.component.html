@@ -1,0 +1,33 @@
+<mat-dialog-content color class="modal-users-cont">
+    <div class="cont-main-modal">
+        <div class="options-modal-cont">
+            <h2 class="title-modal">{{titleAction}} usuario</h2>
+            <div mat-dialog-close class="icon-container icon-close">
+                <img src="/assets/images/cancel_96921.svg" alt="close-modal-icon-svg">
+            </div>
+        </div>
+        <form [formGroup]="formUser">
+
+            <label for="">Nombre de usuario</label>
+            <input type="text">
+
+            <label for="">Contraseña</label>
+            <input type="password">
+
+            <label for="">Confirmar contraseña</label>
+            <input type="password">
+
+            <label for="">Rol</label>
+            <select name="" id="">
+                <option value="Administrador">Administrador</option>
+                <option value="Captador">Captador</option>
+            </select>
+
+            <div class="btns-form-user">
+                <button class="btn-confirm-user" mat-dialog-close [disabled]="formUser.invalid">{{btnAction}}</button>
+                <button class="btn-cancel-user" mat-dialog-close>Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,127 @@
+
+.cont-main-modal {
+    width: 42vw;
+}
+
+.options-modal-cont {
+    display: flex;
+    justify-content: space-between;
+    width: 42vw;
+    margin-bottom: 5vh;
+}
+
+.options-modal-cont .icon-container {
+    width: 3vw;
+    height: 3vw;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.options-modal-cont .icon-container:hover {
+    background-color: #32323231;
+    border-radius: 50px;
+}
+
+.options-modal-cont .icon-container img {
+    width: 1.7vw;
+    height: auto;
+    filter: invert(20%);
+}
+
+.title-modal {
+    font-size: 1.5vw;
+    font-family: 'Montserrat', sans-serif;
+    color: #323232e1;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.form-clinic-history-player-cont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sub-part-form {
+    display: flex;
+    flex-direction: column;
+    width: 22vw;
+}
+
+label {
+    width: 100%;
+    font-size: 1.1vw;
+    font-weight: 600;
+}
+
+input {
+    width: 20vw;
+    height: 5vh;
+    border-radius: 8px;
+    background-color: #eaf3f3;
+    margin-bottom: 5vh;
+    border: solid 1px #6161615b;
+    font-size: 1.1vw;
+}
+
+textarea {
+    resize: none !important;
+    height: 20vh;
+    width: 42vw;
+    border-radius: 8px;
+    border: solid 1px #6161615b;
+    font-size: 1.1vw;
+    background-color: #eaf3f3;
+}
+
+.form-buttons-cont {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 42vw;
+    height: 5vh;
+    margin-top: 4vh;
+}
+
+.form-buttons-cont .btn-form {
+    width: 9vw;
+    height: 100%;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1vw;
+    font-weight: 500;
+    margin: 0 1vw;
+}
+
+.form-buttons-cont .btn-confirm {
+    background-color: #313030;
+    border: #313030;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.285);
+    transition: 0.7s;
+}
+.form-buttons-cont .btn-confirm:hover {
+    box-shadow: inset 0 0 2px 2px #640808;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.801);
+}
+
+.form-buttons-cont .btn-cancel {
+    background-color: rgba(237, 27, 46, 0.8);
+    border: rgba(237, 27, 46, 0.8);
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.285);
+    transition: 0.7s;
+}
+.form-buttons-cont .btn-cancel:hover {
+    box-shadow: inset 0 0 2px 2px #640808;
+    box-shadow: 0px 0px 10px rgba(78, 11, 11, 0.801);
+}

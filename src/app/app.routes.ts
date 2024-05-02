@@ -1,3 +1,48 @@
 import { Routes } from '@angular/router';
+import { AuthComponent } from './components/auth/auth.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { UserComponent } from './components/user/user.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { MapComponent } from './components/map/map.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { MenuPlayerComponent } from './components/player-context/menu-player/menu-player.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+    {
+        path: '',
+        component: LayoutComponent,
+    },
+    {
+        path: 'login',
+        component: AuthComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'users',
+        component: UserComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'calendar',
+        component: CalendarComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'map',
+        component: MapComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'players',
+        loadChildren: () => import("./components/player-context/player.routes").then(m => m.PLAYER_ROUTES)
+    },
+    {
+        path: ':id/profile',
+        component: ProfileComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: '', pathMatch: 'full'
+    }
+];

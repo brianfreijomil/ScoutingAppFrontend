@@ -1,0 +1,44 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="home-cont">
+            <div class="home-main-cont">
+                <h2 class="home-title">ScoutingPro | Secciones de la plataforma</h2>
+                <ul class="home-ul">
+                    <li [routerLink]="'/calendar'" class="home-li">
+                        <article class="home-article">
+                            <h3>CALENDARIO</h3>
+                            <p>Manejo de Eventos (Agregar, Editar o Eliminar eventos), 
+                                visualizaciones por Mes, Semana, Dia. Cada captador podra ver que evento se le ha asignado. </p>
+                        </article>
+                    </li>
+                    <li [routerLink]="'/map'" class="home-li">
+                        <article class="home-article">
+                            <h3>MAPA</h3>
+                            <p>Interaccion con un mapa de Argentina y Logistica de equipo de trabajo. 
+                                Estadisticas de captacion a nivel Pais (por provincias), Provincia de Buenos Aires (por municipios),
+                                y Capital Federal (Comunas).
+                            </p>
+                        </article>
+                    </li>
+                    <li [routerLink]="'/players'" class="home-li">
+                        <article class="home-article">
+                            <h3>JUGADORES</h3>
+                            <p>Gestion de jugadores captados (Agregar, Eliminar o Editar un jugador), fichas de captacion.
+                                Busqueda de jugadores por diferentes filtros, pasaje de jugadores "observados" a "fichados"
+                            </p>
+                        </article>
+                    </li>
+                    <li [routerLink]="'/users'" class="home-li">
+                        <article class="home-article">
+                            <h3>USUARIOS</h3>
+                            <p>Gestion de usuarios (Agregar, Eliminar, Editar, Habilitar/Inhabilitar un usuario) con acceso a la plataforma, Distintos roles dependiendo de la funcion.
+                            </p>
+                        </article>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</div>

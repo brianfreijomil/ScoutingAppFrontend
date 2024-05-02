@@ -1,0 +1,80 @@
+* {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+header {
+    height: 10vh;
+    width: 100%;
+    background-color: #191919;
+    color: #fff;
+    box-shadow: inset 0 0 7px 5px #111111;
+    display: flex;
+    justify-content: space-between;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; */
+}
+
+/*Logo page*/
+
+.logo-page-cont {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.logo-page {
+    font-size: 2vw;
+    margin-left: 13%;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+/* Logo Home */
+
+.logo-home-cont {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-home {
+    height: 40%;
+    filter: invert();
+    cursor: pointer;
+}
+
+/* Logo Logout */
+
+.logo-logout-cont {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content:end;
+    align-items: center;
+}
+
+.logo-logout {
+    font-size:small;
+    margin-right: 6%;
+    height: 50%;
+    width: 30%;
+    cursor: pointer;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    border-radius: 7px;
+}
+.logo-logout p {
+    font-size:1.1vw;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-logout:hover {
+    background-color: #282828;
+}

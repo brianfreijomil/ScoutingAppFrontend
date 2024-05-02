@@ -1,0 +1,95 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="section-map-stats">
+            <div class="main-contain">
+                <div class="cont-scroll">
+
+                    <section class="section-map">
+                        <div class="section-title-cont">
+                            <h2>Mapa interactivo</h2>
+                            <p>Ver a estadisticas</p>
+                        </div>
+                        <div class="map-container">
+                        </div>
+                    </section>
+
+                    <section class="section-stats">
+                        <div class="section-title-cont">
+                            <h2>Estadisticas de captacion</h2>
+                            <p>Ver mapa</p>
+                        </div>
+                        <div class="nav-stats">
+                            <ul>
+                                <li><p [ngStyle]="{ 
+                                    'background-color': activeNavCountry ? 'rgba(31, 31, 31, 1)' : '', 
+                                    'color': activeNavCountry ? 'rgb(217, 217, 217)' : '', 
+                                    'box-shadow': activeNavCountry ? '0 10px 10px rgba(0, 0, 0, 0.779)' : '' }"
+                                 (click)="viewStatsCountry()" >Argentina</p></li>
+                                <li><p [ngStyle]="{ 
+                                    'background-color': activeNavState ? 'rgba(31, 31, 31, 1)' : '', 
+                                    'color': activeNavState ? '#D9D9D9' : '', 
+                                    'box-shadow': activeNavState ? '0 10px 10px rgba(0, 0, 0, 0.779)' : '' }"  
+                                 (click)="viewStatsState()" >Provincia de Buenos Aires</p></li>
+                                <li><p [ngStyle]="{ 
+                                    'background-color': activeNavCapital ? 'rgba(31, 31, 31, 1)' : '', 
+                                    'color': activeNavCapital ? '#D9D9D9' : '', 
+                                    'box-shadow': activeNavCapital ? '0 10px 10px rgba(0, 0, 0, 0.779)' : '' }"  
+                                 (click)="viewStatsCapital()" >Capital Federal</p></li>
+                            </ul>
+                        </div>
+                        <div class="stats-table-bonus-cont">
+                            <div class="back-table-cont">
+                                <div class="mat-elevation-z2 table-cont">
+                                    <table mat-table [dataSource]="dataStatsList">
+                                        
+                                        <ng-container matColumnDef="filtro">
+                                            <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>{{currentStats}}</th>
+                                            <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.filtro}}</td>
+                                        </ng-container>
+                        
+                                        <ng-container matColumnDef="captados">
+                                            <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Captados</th>
+                                            <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.captados}}</td>
+                                        </ng-container>
+                        
+                                        <ng-container matColumnDef="fichados">
+                                            <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Fichados</th>
+                                            <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.fichados}}</td>
+                                        </ng-container>
+    
+                                        <ng-container matColumnDef="captadores">
+                                            <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Captadores</th>
+                                            <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.captadores}}</td>
+                                        </ng-container>
+    
+                                        <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+                                        <tr mat-row *matRowDef="let row; columns:columnsTable;"></tr>
+                                    </table>
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                                    </mat-paginator>
+                                </div>
+                            </div>
+                            <div class="bonus-cont">
+                                <aside class="bonus-part totals-stats">
+                                    <ul>
+                                        <li>JUGADORES CAPTADOS: <span>6</span></li>
+                                        <li>FICHADOS: <span>3</span></li>
+                                        <li>CAPTADORES: <span>1</span></li>
+                                    </ul>
+                                </aside>
+                                <div class="divisor-line"></div>
+                                <aside class="bonus-part avg-stats">
+                                    <p>PORCENTAJE DE JUGADORES FICHADOS</p>
+                                    <p class="avg-p">09%</p>
+                                </aside>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

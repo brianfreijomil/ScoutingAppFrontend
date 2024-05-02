@@ -1,0 +1,67 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="main-content">
+            <div class="sub-header-cont">
+                <h2 class="title-section">Jugadores | Busqueda</h2>
+            </div>
+            <div class="important-cont">
+                <div class="form-search">
+
+                    <div class="form-item">
+                        <label for="">Apellido</label>
+                        <input type="text" placeholder="apellido">
+                    </div>
+                    <div class="form-item">
+                        <label for="">Nombre</label>
+                        <input type="text" placeholder="nombre">
+                    </div>
+                    <div class="form-item">
+                        <label for="">Categoria</label>
+                        <input type="text" placeholder="categoria">
+                    </div>
+                    <div class="form-item">
+                        <label for="">Captador</label>
+                        <input type="text" placeholder="captador">
+                    </div>
+    
+                </div>
+                <div class="result-search">
+                    <div class="mat-elevation-z2 table-cont">
+                        <table mat-table [dataSource]="dataPlayersFoundList">
+                            
+                            <ng-container matColumnDef="nameComplete">
+                                <th mat-header-cell *matHeaderCellDef 
+                                    style="
+                                        font-size: 1.1vw; 
+                                        padding: 0 0.5vw 0 0.5vw; 
+                                        text-align: center; 
+                                        background-color: #dcdcdc;">
+                                        Nombre completo
+                                </th>
+                                <td [routerLink]="'profile'" mat-cell *matCellDef="let element" style="cursor: pointer; font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.surname}} {{element.name}}</td>
+                            </ng-container>
+            
+                            <ng-container matColumnDef="category">
+                                <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Categoria</th>
+                                <td mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.category}}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Fichado/Observado</th>
+                                <td mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.status}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="columnsTablePlayersFound"></tr>
+                            <tr mat-row *matRowDef="let row; columns:columnsTablePlayersFound;"></tr>
+                        </table>
+
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </main>
+</div>

@@ -1,0 +1,57 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="users-cont">
+            <div class="main-cont-users">
+                <article class="sub-header">
+                    <h2>Gestion de Usuarios</h2>
+                    <button (click)="createUser()">+ Crear usuario</button>
+                </article>
+                <div class="table-users-cont">
+                    <div class="back-table-cont">
+                        <div class="mat-elevation-z2 table-cont">
+                            <table mat-table [dataSource]="dataUserList">
+                                
+                                <ng-container matColumnDef="username">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Nombre de usuario</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.username}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="password">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Contraseña</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.password}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="roleDescription">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Rol</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.roleDescription}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Acciones</th>
+                                    <td style="display: flex; justify-content: space-around; padding: 0; align-items: center;" mat-cell *matCellDef="let element">
+                
+                                        <button mat-icon-button color="primary" (click)="updateUser(element)" style="padding: 0; width: 3vw;">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="warn" (click)="deleteUser(element)" style="padding: 0; width: 3vw;">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="disabled" (click)="setStatusUser(element)" style="padding: 0; width: 3vw;">
+                                            <mat-icon>lock_open</mat-icon>
+                                        </button>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+                                <tr mat-row *matRowDef="let row; columns:columnsTable;"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
