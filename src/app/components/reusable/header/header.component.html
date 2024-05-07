@@ -6,7 +6,7 @@
         <img [routerLink]="''" routerLinkActive="router-link-active"  class="logo-home" src="assets/images/home_icon-icons.com_73532.svg" type="img/svg" alt="svg-icon-home">
     </div>
     <div *ngIf="currentUrl !== ''" class="logo-logout-cont">
-        <div [routerLink]="'/login'" class="logo-logout">
+        <div class="logo-logout" (click)="logout()">
             <p>Cerrar sesión</p>
         </div>
     </div>

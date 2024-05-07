@@ -5,16 +5,15 @@ import { UserComponent } from './components/user/user.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { MapComponent } from './components/map/map.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { MenuPlayerComponent } from './components/player-context/menu-player/menu-player.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: LayoutComponent,
+        component: AuthComponent,
     },
     {
-        path: 'login',
-        component: AuthComponent,
+        path: 'home',
+        component: LayoutComponent,
         pathMatch: 'full'
     },
     {
