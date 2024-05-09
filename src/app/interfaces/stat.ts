@@ -1,6 +1,6 @@
-export interface Stats {
+export interface Stat {
     id:number,
-    registerDate:Date,
+    dateRegister:Date,
     matches:number,
     minutes:number,
     scores:number,

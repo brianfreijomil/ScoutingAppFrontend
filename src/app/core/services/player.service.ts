@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Player } from '../../interfaces/player';
 import { Observable } from 'rxjs';
-import { ResponseApi } from '../../interfaces/response-api';
 import { PlayerSearch } from '../../interfaces/player-search';
+import { ResponseEntity } from '../../interfaces/response-entity';
 
 @Injectable({
   providedIn: 'root'
@@ -16,33 +16,33 @@ export class PlayerService {
   constructor(private http:HttpClient) { }
 
   //get list of players by team id
-  getAllPlayersByTeam(teamId:number):Observable<PlayerSearch> {
-    return this.http.get<PlayerSearch>(`${this.urlApi}/?teamId=${teamId}`);
+  getAllPlayersByTeam(teamId:number):Observable<ResponseEntity> {
+    return this.http.get<ResponseEntity>(`${this.urlApi}/by-team?team_id=${teamId}`);
   }
 
   //get player by id
-  getPlayer(id:number):Observable<Player> {
-    return this.http.get<Player>(`${this.urlApi}/${id}`);
+  getPlayer(id:number):Observable<ResponseEntity> {
+    return this.http.get<ResponseEntity>(`${this.urlApi}/${id}`);
   }
 
   //Save player
-  save(request:Player):Observable<Player> {
-    return this.http.post<Player>(`${this.urlApi}`, request);
+  save(request:Player):Observable<ResponseEntity> {
+    return this.http.post<ResponseEntity>(`${this.urlApi}`, request);
   }
 
   //Update player
-  update(request:Player):Observable<ResponseApi> {
-    return this.http.put<ResponseApi>(`${this.urlApi}/${request.id}`, request);
+  update(request:Player):Observable<ResponseEntity> {
+    return this.http.put<ResponseEntity>(`${this.urlApi}/${request.dni}`, request);
   }
 
   //update multimedia player
-  updateMultimedia(request:any):Observable<ResponseApi> {
-    return this.http.patch<ResponseApi>(`${this.urlApi}/${request.id}`, request)
+  updateMultimedia(request:any):Observable<ResponseEntity> {
+    return this.http.patch<ResponseEntity>(`${this.urlApi}/${request.id}`, request)
   }
 
   //Delete player
-  delete(id:number):Observable<ResponseApi> {
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
+  delete(id:number):Observable<ResponseEntity> {
+    return this.http.delete<ResponseEntity>(`${this.urlApi}/${id}`);
   }
 
 }

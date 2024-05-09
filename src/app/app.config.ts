@@ -3,15 +3,15 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { KeycloakService } from './core/services/keycloak/keycloak.service';
-
-export function kcFactory(kcService:KeycloakService) {
-  return () => kcService.init();
-}
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpTokenInterceptor } from './interceptors/http-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(
+      withInterceptors([httpTokenInterceptor])
+    )
   ]
 };

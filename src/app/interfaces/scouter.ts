@@ -1,5 +1,5 @@
 export interface Scouter {
-    scouterId:number,
-    scouterSurname:string,
-    scouterName:string
+    id:number,
+    surname:string,
+    name:string
 }

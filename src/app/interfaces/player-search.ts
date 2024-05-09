@@ -1,10 +1,10 @@
+import { Scouter } from "./scouter";
+
 export interface PlayerSearch {
-    id:number,
-    dni:string,
+    dni:number,
     surname:string,
     name:string,
     category:number,
-    status:string,
-    scouterSurname:string,
-    scouterName:string
+    status:boolean,
+    scouter:Scouter
 }

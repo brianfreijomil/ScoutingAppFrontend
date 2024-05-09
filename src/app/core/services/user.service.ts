@@ -3,11 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { environment } from '../../../environments/environment';
-import { UpdateStatusSubscribe } from '../../interfaces/update-status-subscribe';
-import { StatusUser } from '../../interfaces/status-user';
-import { UserLogin } from '../../interfaces/user-login';
-import { Session } from '../../interfaces/session';
-import { ResponseApi } from '../../interfaces/response-api';
+import { ResponseEntity } from '../../interfaces/response-entity';
 
 @Injectable({
   providedIn: 'root'
@@ -19,38 +15,43 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   //get list of users by team id
-  list(teamId:number):Observable<User> {
-    return this.http.get<User>(`${this.urlApi}/team/${teamId}`);
+  getAllByTeamId(teamId:number):Observable<ResponseEntity> {
+    return this.http.get<ResponseEntity>(`${this.urlApi}/search?team_id=${teamId}`);
+  }
+
+  //get user by username
+  getByUsername(username:string):Observable<ResponseEntity> {
+    return this.http.get<ResponseEntity>(`${this.urlApi}/${username}`);
   }
 
   //Save user
-  save(request:User):Observable<User> {
-    return this.http.post<User>(`${this.urlApi}`, request);
+  save(request:User):Observable<ResponseEntity> {
+    return this.http.post<ResponseEntity>(`${this.urlApi}`, request);
   }
 
   //Update user
-  update(request:User):Observable<ResponseApi> {
-    return this.http.put<ResponseApi>(`${this.urlApi}/${request.id}`, request);
+  update(request:User):Observable<ResponseEntity> {
+    return this.http.put<ResponseEntity>(`${this.urlApi}/${request.id}`, request);
   }
 
   //Delete user
-  delete(id:number):Observable<ResponseApi> {
-    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
+  delete(id:number):Observable<ResponseEntity> {
+    return this.http.delete<ResponseEntity>(`${this.urlApi}/${id}`);
   }
 
   //update status subscribe
-  updateSubscribeStatusByTeamId(request:UpdateStatusSubscribe, teamId:number):Observable<ResponseApi> {
-    return this.http.patch<ResponseApi>(`${this.urlApi}/team/${teamId}/subscription`, request);
-  }
+  // updateSubscribeStatusByTeamId(request:UpdateStatusSubscribe, teamId:number):Observable<ResponseEntity> {
+  //   return this.http.patch<ResponseEntity>(`${this.urlApi}/team/${teamId}/subscription`, request);
+  // }
 
   //Update status user
-  updateStatusUser(request:StatusUser, id:number):Observable<ResponseApi> {
-    return this.http.patch<ResponseApi>(`${this.urlApi}/${id}`, request);
-  }
+  // updateStatusUser(request:StatusUser, id:number):Observable<ResponseEntity> {
+  //   return this.http.patch<ResponseEntity>(`${this.urlApi}/${id}`, request);
+  // }
 
   //Login
-  loginUser(request:UserLogin):Observable<Session> {
-    return this.http.post<Session>(`${this.urlApi}/login`, request);
-  }
+  // loginUser(request:UserLogin):Observable<Session> {
+  //   return this.http.post<Session>(`${this.urlApi}/login`, request);
+  // }
 
 }

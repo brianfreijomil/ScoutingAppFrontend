@@ -1,7 +1,7 @@
 export interface ClinicHistory {
     id:number,
-    date:Date,
     title:string,
+    dateRegister:Date,
     report:string,
     playerId:number
 }

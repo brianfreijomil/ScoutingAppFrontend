@@ -1,11 +1,13 @@
+import { Role } from "./role"
+
 export interface User {
     id:number,
-    userName:string,
-    password:string,
-    name:string,
+    username:string,
+    email:string,
     surname:string,
-    status:boolean,
-    suscriptionStatus:boolean,
-    teamId:number,
-    role:string
+    name:string,
+    password?:string,
+    roles:Role[],
+    enable: boolean,
+    teamId:number
 }

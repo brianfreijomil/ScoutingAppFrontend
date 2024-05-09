@@ -9,13 +9,16 @@ export class KeycloakService {
 
   private _keycloak : Keycloak | undefined;
   private _profile : UserProfile | undefined;
+  private _urlKeycloak : string = 'http://localhost:8181';
+  private _realm : string = 'scouting-system';
+  private _clientId : string = 'scoutingsys';
 
   get keycloak() {
     if (!this._keycloak) {
       this._keycloak = new Keycloak({
-        url: 'http://localhost:8181',
-        realm: 'scouting-system',
-        clientId: 'scoutingsys'
+        url: this._urlKeycloak,
+        realm: this._realm,
+        clientId: this._clientId
       });
     }
     return this._keycloak;
@@ -43,9 +46,7 @@ export class KeycloakService {
   }
 
   logout() {
-    return this.keycloak?.logout({redirectUri: 'http://localhost:4200'});
+    return this.keycloak?.logout();
   }
-
-
 
 }

@@ -1,11 +1,10 @@
 import { Time } from "@angular/common";
-import { User } from "./user";
-import { Stats } from "./stats";
-import { ListClinicHistory } from "./list-clinic-history";
+import { Stats } from "./stat";
+import { Scouter } from "./scouter";
+import { ClinicHistory } from "./clinic-history";
 
 export interface Player {
-    id?:number,
-    dni:string,
+    dni:number,
     surname:string,
     name:string,
     contact:string,
@@ -14,11 +13,11 @@ export interface Player {
     height?:number,
     skillLeg?:string,
     urlImage?:string,
-    characteristics?:string,
     firstPosition:string,
     secondPosition?:string,
     valoration?:string,
-    scouter:User,
+    characteristics?:string,
+    scouter:Scouter,
     dateSeen:Date,
     timeSeen?:Time,
     divisionSeen:string,
@@ -26,7 +25,8 @@ export interface Player {
     campSeen:string,
     contactTeamSeen:string,
     urlsVideos?:string[],
-    status?:string,
+    status:string,
+    teamId:number,
     stats?:Stats[],
-    clinicHistory?:ListClinicHistory[]
+    clinicHistory?:ClinicHistory[];
 }
