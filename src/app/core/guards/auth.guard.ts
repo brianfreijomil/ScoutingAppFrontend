@@ -3,11 +3,11 @@ import { CanActivateFn, Router } from "@angular/router";
 import { KeycloakService } from "../services/keycloak/keycloak.service";
 
 export const authGuard: CanActivateFn = () => {
-    const keycloackService = inject(KeycloakService);
+    const tokenService = inject(KeycloakService);
     const router = inject(Router);
-    if(keycloackService.keycloak?.isTokenExpired()) {
-        router.navigate(['login']);
-        return false;
+    if (tokenService.keycloak.isTokenExpired()) {
+      router.navigate(['login']);
+      return false;
     }
     return true;
-}
+  };

@@ -4,10 +4,10 @@ export interface User {
     id:number,
     username:string,
     email:string,
-    surname:string,
-    name:string,
+    lastName:string,
+    firstName:string,
     password?:string,
-    roles:Role[],
-    enable: boolean,
+    roles?:Role[],
+    enabled: boolean,
     teamId:number
 }

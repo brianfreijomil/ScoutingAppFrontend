@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '../reusable/header/header.component';
 import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
+import { UserService } from '../../core/services/user.service';
+import { HttpStatusCode } from '@angular/common/http';
 
 @Component({
   selector: 'app-user',
@@ -17,65 +19,49 @@ import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
 })
 export class UserComponent implements OnInit, AfterViewInit {
 
-  columnsTable:string[] = ['username','password','roleDescription','actions'];
-  datainit:any[] = [
-    {
-      username: "brianFreijomil",
-      password: "12345",
-      roleDescription: "Administrator"
-    },
-    {
-      username: "pepeMujica",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "JoseSanMartin",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "joseJosema",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "lioMessi",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "pepeFreijomil",
-      password: "12345",
-      roleDescription: "Administrator"
-    },
-    {
-      username: "pepeGonzales",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "juanFreijomil",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "marceloAgachate",
-      password: "12345",
-      roleDescription: "captador"
-    },
-    {
-      username: "pabloAimar",
-      password: "12345",
-      roleDescription: "captador"
-    }
-  ];
+  columnsTable:string[] = ['username','email','enabled','actions'];
+  datainit:any[] = [];
   dataUserList = new MatTableDataSource(this.datainit);
   @ViewChild(MatPaginator)tablePagination!:MatPaginator;
   resultAction:boolean = false;
 
-  constructor(private dialog: MatDialog) {
+  constructor(
+    private dialog: MatDialog, 
+    private userService: UserService
+  ) {
 
+  }
+
+  getUsers() {
+    //le paso team id = 1
+    this.userService.getAllByTeamId(1).subscribe({
+      next:(data) => {
+        if(data.status == HttpStatusCode.Ok) { 
+          this.dataUserList = data.body;
+        }
+        else
+          console.log("No error but No data");
+      },
+      error:(err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  getUserByUsername() {
+    this.userService.getByUsername('pepe').subscribe({
+      next: (data) => {
+        if(data.status == HttpStatusCode.Ok) {
+          console.log(data.body);
+        }
+        else {
+          console.log(""+data.message+", "+ data.status);
+        }
+      },
+      error:(err) => {
+        console.log(err);
+      }
+    });
   }
 
   createUser() {
@@ -143,6 +129,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.getUsers();
   }
 
   ngAfterViewInit(): void {
