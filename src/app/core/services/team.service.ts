@@ -8,7 +8,7 @@ import { ResponseApi } from "../../interfaces/response-api";
 @Injectable({
     providedIn: 'root'
   })
-  export class StatsService {
+  export class TeamService {
   
     private urlApi:string = environment.endpoint + "teams";
   

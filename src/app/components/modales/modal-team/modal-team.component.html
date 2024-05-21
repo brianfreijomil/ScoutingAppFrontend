@@ -1,0 +1,37 @@
+<mat-dialog-content color class="modal-team-cont">
+    <div class="cont-main-modal">
+        <div class="options-modal-cont">
+            <h2 class="title-modal">{{titleAction}} equipo</h2>
+            <div mat-dialog-close class="icon-container icon-close">
+                <img src="/assets/images/cancel_96921.svg" alt="close-modal-icon-svg">
+            </div>
+        </div>
+        <form [formGroup]="formTeam">
+
+            <label for="">Nombre del equipo</label>
+            <input type="text" formControlName="name">
+
+            <label for="">Email</label>
+            <input type="text" formControlName="email">
+
+            <label for="">Numero de telefono/celular</label>
+            <input type="text" formControlName="contactNumber">
+
+            <label for="">Subscripcion</label>
+            <select name="" id="" formControlName="subscribed">
+                <option value=true>habilitar</option>
+                <option value=false>inhabilitar</option>
+            </select>
+
+            <label for="">Fecha de expiracion</label>
+            <input type="date" formControlName="dateOfExpired">
+
+            <div class="btns-form-team">
+                <button class="btn-confirm-team" mat-dialog-close [disabled]="formTeam.invalid" (click)="createUpdateTeam()">{{btnAction}}</button>
+                <button class="btn-cancel-team" mat-dialog-close>Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+</mat-dialog-content>
+

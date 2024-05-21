@@ -6,6 +6,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { MapComponent } from './components/map/map.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { authGuard } from './core/guards/auth.guard';
+import { TeamComponent } from './components/team/team.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,12 @@ export const routes: Routes = [
         path: 'home',
         canActivate: [authGuard],
         component: LayoutComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'teams',
+        canActivate: [authGuard],
+        component: TeamComponent,
         pathMatch: 'full'
     },
     {

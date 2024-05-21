@@ -2,7 +2,7 @@ export interface Team {
     id:number,
     name:string,
     email:string,
-    contactNUmber:string,
+    contactNumber:string,
     subscribed:boolean,
-    dateOfExpiration:Date
+    dateOfExpired:Date
 }

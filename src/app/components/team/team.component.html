@@ -1,0 +1,67 @@
+<app-header/>
+<div class="body-contain">
+    <app-menu-page/>
+    <main class="page-main-contain">
+        <section class="teams-cont">
+            <div class="main-cont-teams">
+                <article class="sub-header">
+                    <h2>Gestion de equipos</h2>
+                    <button (click)="createTeam()">+ Crear equipo</button>
+                </article>
+                <div class="table-teams-cont">
+                    <div class="back-table-cont">
+                        <div class="mat-elevation-z2 table-cont">
+                            <table mat-table [dataSource]="dataTeamList">
+                                
+                                <ng-container matColumnDef="name">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Equipo</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.name}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="email">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Email</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.email}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="contact">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Contacto</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.contactNumber}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="subscribed">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Habilitado</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.subscribed == true ? 'Habilitado' : 'Deshabilitado'}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="dateOfExpired">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Fin subscripcion</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.dateOfExpired}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="actions">
+                                    <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Acciones</th>
+                                    <td style="display: flex; justify-content: space-around; padding: 0; align-items: center;" mat-cell *matCellDef="let element">
+                
+                                        <button mat-icon-button color="primary" (click)="updateTeam(element)" style="padding: 0; width: 3vw;">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="warn" (click)="deleteTeam(element)" style="padding: 0; width: 3vw;">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="disabled" (click)="setStatusTeam(element)" style="padding: 0; width: 3vw;">
+                                            <mat-icon>lock_open</mat-icon>
+                                        </button>
+                                    </td>
+                                </ng-container>
+                                <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
+                                <tr mat-row *matRowDef="let row; columns:columnsTable;"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
