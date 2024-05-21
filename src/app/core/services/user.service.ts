@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { environment } from '../../../environments/environment';
-import { ResponseEntity } from '../../interfaces/response-entity';
+import { ResponseApi } from '../../interfaces/response-api';
 
 @Injectable({
   providedIn: 'root'
@@ -15,28 +15,28 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   //get list of users by team id
-  getAllByTeamId(teamId:number):Observable<ResponseEntity> {
-    return this.http.get<ResponseEntity>(`${this.urlApi}/search?team_id=${teamId}`);
+  getAllByTeamId(teamId:number):Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/search?team_id=${1}`);
   }
 
   //get user by username
-  getByUsername(username:string):Observable<ResponseEntity> {
-    return this.http.get<ResponseEntity>(`${this.urlApi}/${username}`);
+  getByUsername(username:string):Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/${username}`);
   }
 
   //Save user
-  save(request:User):Observable<ResponseEntity> {
-    return this.http.post<ResponseEntity>(`${this.urlApi}`, request);
+  save(request:User):Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(`${this.urlApi}`, request);
   }
 
   //Update user
-  update(request:User):Observable<ResponseEntity> {
-    return this.http.put<ResponseEntity>(`${this.urlApi}/${request.id}`, request);
+  update(request:User):Observable<ResponseApi> {
+    return this.http.put<ResponseApi>(`${this.urlApi}/${request.id}`, request);
   }
 
   //Delete user
-  delete(id:number):Observable<ResponseEntity> {
-    return this.http.delete<ResponseEntity>(`${this.urlApi}/${id}`);
+  delete(id:number):Observable<ResponseApi> {
+    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
   //update status subscribe

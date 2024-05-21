@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Player } from '../../interfaces/player';
 import { Observable } from 'rxjs';
-import { PlayerSearch } from '../../interfaces/player-search';
-import { ResponseEntity } from '../../interfaces/response-entity';
+import { ResponseApi } from '../../interfaces/response-api';
 
 @Injectable({
   providedIn: 'root'
@@ -16,33 +15,33 @@ export class PlayerService {
   constructor(private http:HttpClient) { }
 
   //get list of players by team id
-  getAllPlayersByTeam(teamId:number):Observable<ResponseEntity> {
-    return this.http.get<ResponseEntity>(`${this.urlApi}/by-team?team_id=${teamId}`);
+  getAllPlayersByTeam(teamId:number):Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/by-team?team_id=${teamId}`);
   }
 
   //get player by id
-  getPlayer(id:number):Observable<ResponseEntity> {
-    return this.http.get<ResponseEntity>(`${this.urlApi}/${id}`);
+  getPlayer(id:number):Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
   //Save player
-  save(request:Player):Observable<ResponseEntity> {
-    return this.http.post<ResponseEntity>(`${this.urlApi}`, request);
+  save(request:Player):Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(`${this.urlApi}`, request);
   }
 
   //Update player
-  update(request:Player):Observable<ResponseEntity> {
-    return this.http.put<ResponseEntity>(`${this.urlApi}/${request.dni}`, request);
+  update(request:Player):Observable<ResponseApi> {
+    return this.http.put<ResponseApi>(`${this.urlApi}/${request.dni}`, request);
   }
 
   //update multimedia player
-  updateMultimedia(request:any):Observable<ResponseEntity> {
-    return this.http.patch<ResponseEntity>(`${this.urlApi}/${request.id}`, request)
+  updateMultimedia(request:any):Observable<ResponseApi> {
+    return this.http.patch<ResponseApi>(`${this.urlApi}/${request.id}`, request)
   }
 
   //Delete player
-  delete(id:number):Observable<ResponseEntity> {
-    return this.http.delete<ResponseEntity>(`${this.urlApi}/${id}`);
+  delete(id:number):Observable<ResponseApi> {
+    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
 }

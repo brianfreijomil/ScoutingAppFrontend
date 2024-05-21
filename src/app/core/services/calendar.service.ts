@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ResponseEntity } from '../../interfaces/response-entity';
+import { ResponseApi } from '../../interfaces/response-api';
 import { EventCalendar } from '../../interfaces/event-calendar';
 
 @Injectable({
@@ -15,28 +15,28 @@ export class CalendarService {
   constructor(private http:HttpClient) { }
 
   //get All events by team Id
-  getAllByTeamId(teamId:number): Observable<ResponseEntity> {
-    return this.http.get<ResponseEntity>(`${this.urlApi}/${teamId}`);
+  getAllByTeamId(teamId:number): Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/${teamId}`);
   }
 
   //get event by id
-  getById(id:number): Observable<ResponseEntity> {
-    return this.http.get<ResponseEntity>(`${this.urlApi}/${id}`);
+  getById(id:number): Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
   //create event
-  save(event:EventCalendar):Observable<ResponseEntity> {
-    return this.http.post<ResponseEntity>(`${this.urlApi}`, event);
+  save(event:EventCalendar):Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(`${this.urlApi}`, event);
   }
 
   //update event
-  update(event:EventCalendar):Observable<ResponseEntity> {
-    return this.http.put<ResponseEntity>(`${this.urlApi}/&${event.id}`, event);
+  update(event:EventCalendar):Observable<ResponseApi> {
+    return this.http.put<ResponseApi>(`${this.urlApi}/&${event.id}`, event);
   }
 
   //delete event
-  delete(id:number):Observable<ResponseEntity> {
-    return this.http.delete<ResponseEntity>(`${this.urlApi}/&${id}`);
+  delete(id:number):Observable<ResponseApi> {
+    return this.http.delete<ResponseApi>(`${this.urlApi}/&${id}`);
   }
 
 

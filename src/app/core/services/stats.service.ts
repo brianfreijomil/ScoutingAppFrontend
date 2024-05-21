@@ -3,7 +3,7 @@ import { Stat } from '../../interfaces/stat';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ResponseEntity } from '../../interfaces/response-entity';
+import { ResponseApi } from '../../interfaces/response-api';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +15,18 @@ export class StatsService {
   constructor(private http:HttpClient) { }
 
   //Save stats
-  save(request:Stat):Observable<ResponseEntity> {
-    return this.http.post<ResponseEntity>(`${this.urlApi}`, request);
+  save(request:Stat):Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(`${this.urlApi}`, request);
   }
 
   //Update stats
-  update(request:Stat):Observable<ResponseEntity> {
-    return this.http.put<ResponseEntity>(`${this.urlApi}/${request.id}`, request);
+  update(request:Stat):Observable<ResponseApi> {
+    return this.http.put<ResponseApi>(`${this.urlApi}/${request.id}`, request);
   }
 
   //Delete stats
-  delete(id:number):Observable<ResponseEntity> {
-    return this.http.delete<ResponseEntity>(`${this.urlApi}/${id}`);
+  delete(id:number):Observable<ResponseApi> {
+    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
 }

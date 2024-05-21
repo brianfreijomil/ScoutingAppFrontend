@@ -9,6 +9,7 @@ import { HeaderComponent } from '../reusable/header/header.component';
 import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
 import { UserService } from '../../core/services/user.service';
 import { HttpStatusCode } from '@angular/common/http';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +21,7 @@ import { HttpStatusCode } from '@angular/common/http';
 export class UserComponent implements OnInit, AfterViewInit {
 
   columnsTable:string[] = ['username','email','enabled','actions'];
-  datainit:any[] = [];
+  datainit:User[] = [];
   dataUserList = new MatTableDataSource(this.datainit);
   @ViewChild(MatPaginator)tablePagination!:MatPaginator;
   resultAction:boolean = false;
@@ -36,7 +37,7 @@ export class UserComponent implements OnInit, AfterViewInit {
     //le paso team id = 1
     this.userService.getAllByTeamId(1).subscribe({
       next:(data) => {
-        if(data.status == HttpStatusCode.Ok) { 
+        if(data.status === 'OK') {
           this.dataUserList = data.body;
         }
         else
@@ -51,7 +52,7 @@ export class UserComponent implements OnInit, AfterViewInit {
   getUserByUsername() {
     this.userService.getByUsername('pepe').subscribe({
       next: (data) => {
-        if(data.status == HttpStatusCode.Ok) {
+        if(data.status === 'OK') {
           console.log(data.body);
         }
         else {

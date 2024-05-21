@@ -18,14 +18,14 @@
                                     <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.username}}</td>
                                 </ng-container>
                 
-                                <ng-container matColumnDef="password">
-                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Contraseña</th>
-                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.password}}</td>
+                                <ng-container matColumnDef="email">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Email</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.email}}</td>
                                 </ng-container>
                 
-                                <ng-container matColumnDef="roleDescription">
-                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Rol</th>
-                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.roleDescription}}</td>
+                                <ng-container matColumnDef="enabled">
+                                    <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Habilitado</th>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.enabled}}</td>
                                 </ng-container>
                 
                                 <ng-container matColumnDef="actions">

@@ -3,7 +3,7 @@ import { ClinicHistory } from '../../interfaces/clinic-history';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { ResponseEntity } from '../../interfaces/response-entity';
+import { ResponseApi } from '../../interfaces/response-api';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +15,18 @@ export class ClinicHistoryService {
   constructor(private http:HttpClient) { }
 
   //save clinic history report
-  save(request:ClinicHistory):Observable<ResponseEntity> {
-    return this.http.post<ResponseEntity>(`${this.urlApi}`, request);
+  save(request:ClinicHistory):Observable<ResponseApi> {
+    return this.http.post<ResponseApi>(`${this.urlApi}`, request);
   }
 
   //update clinic history
-  update(request:ClinicHistory):Observable<ResponseEntity> {
-    return this.http.put<ResponseEntity>(`${this.urlApi}/${request.id}`, request);
+  update(request:ClinicHistory):Observable<ResponseApi> {
+    return this.http.put<ResponseApi>(`${this.urlApi}/${request.id}`, request);
   }
 
   //delete clinic history
-  delete(id:number):Observable<ResponseEntity> {
-    return this.http.delete<ResponseEntity>(`${this.urlApi}/${id}`);
+  delete(id:number):Observable<ResponseApi> {
+    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
 }

@@ -15,7 +15,7 @@ export class KeycloakService {
       this._keycloak = new Keycloak({
         url: 'http://localhost:8181',
         realm: 'spring-auth',
-        clientId: 'scouting-client',
+        clientId: 'scouting-app-client',
       });
     }
     return this._keycloak;
