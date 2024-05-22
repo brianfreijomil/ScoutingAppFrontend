@@ -10,6 +10,8 @@ import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
 import { UserService } from '../../core/services/user.service';
 import { HttpStatusCode } from '@angular/common/http';
 import { User } from '../../interfaces/user';
+import { UtilityService } from '../../core/services/utility.service';
+import { KeycloakService } from '../../core/services/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-user',
@@ -26,27 +28,49 @@ export class UserComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator)tablePagination!:MatPaginator;
   resultAction:boolean = false;
 
+
   constructor(
     private dialog: MatDialog, 
-    private userService: UserService
+    private userService: UserService,
+    private utilityService: UtilityService,
+    private keycloakService: KeycloakService
   ) {
 
   }
 
   getUsers() {
-    //le paso team id = 1
-    this.userService.getAllByTeamId(1).subscribe({
-      next:(data) => {
-        if(data.status === 'OK') {
-          this.dataUserList = data.body;
-        }
-        else
-          console.log("No error but No data");
-      },
-      error:(err) => {
-        console.log(err);
+    const userAttributes = this.keycloakService.profile?.attributes;
+    if (userAttributes && userAttributes['team_id'] && Array.isArray(userAttributes['team_id'])) {
+      const teamId = userAttributes['team_id'][0];
+      if(teamId == 0) {
+        this.userService.getAllUsers(this.keycloakService.profile?.id!).subscribe({
+          next:(data) => {
+            if(data.status === 'OK') {
+              this.dataUserList = data.body;
+            }
+            else
+              console.log("No error but No data");
+          },
+          error:(err) => {
+            console.log(err);
+          }
+        });
       }
-    });
+      else {
+        this.userService.getAllByTeamId(teamId).subscribe({
+          next:(data) => {
+            if(data.status === 'OK') {
+              this.dataUserList = data.body;
+            }
+            else
+              console.log("No error but No data");
+          },
+          error:(err) => {
+            console.log(err);
+          }
+        });
+      }
+    }
   }
 
   getUserByUsername() {
@@ -69,16 +93,20 @@ export class UserComponent implements OnInit, AfterViewInit {
     this.dialog.open(ModalUserComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result === "true") {
+        this.getUsers();
+      }
     });
   }
 
-  updateUser(any:any) {
+  updateUser(user:User) {
     this.dialog.open(ModalUserComponent, {
       disableClose:true,
-      data: any
+      data: user
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result === "true") {
+        this.getUsers();
+      }
     });
   }
 

@@ -31,7 +31,6 @@ export class TeamComponent implements OnInit, AfterViewInit {
   datainit:Team[] = [];
   dataTeamList = new MatTableDataSource(this.datainit);
   @ViewChild(MatPaginator)tablePagination!:MatPaginator;
-  resultAction:boolean = false;
 
   constructor(
     private dialog: MatDialog, 
@@ -76,8 +75,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
     this.dialog.open(ModalTeamComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result == "true") {
-        console.log("llego");
+      if(result === "true") {
         this.getTeams();
       }
     });
@@ -88,7 +86,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
       disableClose:true,
       data: team
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.getTeams();
+      if(result === "true") this.getTeams();
     });
   }
 

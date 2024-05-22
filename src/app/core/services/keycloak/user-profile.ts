@@ -5,4 +5,5 @@ export interface UserProfile {
     firstName?: string;
     lastName?: string;
     token?: string;
+    attributes?: Record<string, unknown>
 }

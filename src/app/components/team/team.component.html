@@ -30,7 +30,7 @@
 
                                 <ng-container matColumnDef="subscribed">
                                     <th style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;" mat-header-cell *matHeaderCellDef>Habilitado</th>
-                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element">{{element.subscribed == true ? 'Habilitado' : 'Deshabilitado'}}</td>
+                                    <td style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;" mat-cell *matCellDef="let element" [ngClass]="{'subscribed-style' : element.subscribed}">{{element.subscribed == true ? 'Habilitado' : 'Deshabilitado'}}</td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="dateOfExpired">

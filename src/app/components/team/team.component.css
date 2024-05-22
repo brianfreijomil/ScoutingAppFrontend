@@ -114,3 +114,7 @@ tr.mat-mdc-row {
 tr.mat-mdc-header-row {
     height: 8vh !important;
 }
+
+td.subscribed-style {
+    background-color: #abf7a0c3;
+}

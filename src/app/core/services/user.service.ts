@@ -14,6 +14,11 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
+  //get all users of system
+  getAllUsers(idCurrentUser:string):Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}?id_current_user=${idCurrentUser}`);
+  }
+
   //get list of users by team id
   getAllByTeamId(teamId:number):Observable<ResponseApi> {
     return this.http.get<ResponseApi>(`${this.urlApi}/search?team_id=${1}`);
