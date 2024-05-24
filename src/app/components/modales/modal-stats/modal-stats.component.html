@@ -25,7 +25,7 @@
             <input value="0" id="inputRedCards" type="number">
             
             <div class="form-buttons-cont">
-                <button mat-dialog-close class="btn-form btn-confirm">{{btnAction}}</button>
+                <button mat-dialog-close class="btn-form btn-confirm" (click)="createUpdateStat()">{{btnAction}}</button>
                 <button mat-dialog-close class="btn-form btn-cancel">Cancelar</button>
             </div>
         </form>

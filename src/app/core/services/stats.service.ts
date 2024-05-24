@@ -14,6 +14,10 @@ export class StatsService {
 
   constructor(private http:HttpClient) { }
 
+  // getAllByPlayerId(playerId:number): Observable<ResponseApi> {
+  //   return this.http.get<ResponseApi>(`${this.urlApi}/`);
+  // }
+
   //Save stats
   save(request:Stat):Observable<ResponseApi> {
     return this.http.post<ResponseApi>(`${this.urlApi}`, request);

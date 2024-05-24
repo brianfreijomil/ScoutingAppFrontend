@@ -21,7 +21,7 @@ export class UserService {
 
   //get list of users by team id
   getAllByTeamId(teamId:number):Observable<ResponseApi> {
-    return this.http.get<ResponseApi>(`${this.urlApi}/search?team_id=${1}`);
+    return this.http.get<ResponseApi>(`${this.urlApi}/search?team_id=${teamId}`);
   }
 
   //get user by username
@@ -31,6 +31,7 @@ export class UserService {
 
   //Save user
   save(request:User):Observable<ResponseApi> {
+    console.log(request);
     return this.http.post<ResponseApi>(`${this.urlApi}`, request);
   }
 
@@ -40,7 +41,7 @@ export class UserService {
   }
 
   //Delete user
-  delete(id:number):Observable<ResponseApi> {
+  delete(id:string):Observable<ResponseApi> {
     return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
   }
 

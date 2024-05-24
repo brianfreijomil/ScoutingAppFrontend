@@ -1,5 +1,5 @@
 import { Time } from "@angular/common";
-import { Stats } from "./stat";
+import { Stat } from "./stat";
 import { Scouter } from "./scouter";
 import { ClinicHistory } from "./clinic-history";
 
@@ -27,6 +27,6 @@ export interface Player {
     urlsVideos?:string[],
     status:string,
     teamId:number,
-    stats?:Stats[],
+    stats?:Stat[],
     clinicHistory?:ClinicHistory[];
 }

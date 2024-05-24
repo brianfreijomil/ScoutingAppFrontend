@@ -13,6 +13,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutComponent } from '../layout/layout.component';
 import { HeaderComponent } from '../reusable/header/header.component';
 import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
+import { Stat } from '../../interfaces/stat';
+import { ClinicHistoryService } from '../../core/services/clinic-history.service';
+import { StatsService } from '../../core/services/stats.service';
+import { PlayerService } from '../../core/services/player.service';
+import { Player } from '../../interfaces/player';
+import { ClinicHistory } from '../../interfaces/clinic-history';
 
 @Component({
   selector: 'app-profile',
@@ -29,107 +35,13 @@ import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
 })
 export class ProfileComponent implements OnInit, AfterViewInit {
 
-  resultAction:boolean = false;
-  columnsTableStats:string[] = ['registerDate','matches','minutes','scores','assists','yellowCards','redCards','actions'];
-  columnsTableHistoryClinicc:string[] = ['registerDate','title','actions'];
-  datainitHistoryClinic:any[] = [
-    {
-      registerDate: "01/02/2024",
-      title: "Lesion de isquiotibial derecho (desgarro)",
-      report: "lorem ipsum dolor sit amet, consectet ut labore et dolore magna aliqu sapiente vit"
-    },
-    {
-      registerDate: "01/02/2024",
-      title: "Lesion de isquiotibial derecho (desgarro)",
-      report: "lorem ipsum dolor sit amet, consectet ut labore et dolore magna aliqu sapiente vit"
-    },
-    {
-      registerDate: "01/02/2024",
-      title: "Lesion de isquiotibial derecho (desgarro)",
-      report: "lorem ipsum dolor sit amet, consectet ut labore et dolore magna aliqu sapiente vit"
-    },
-    {
-      registerDate: "01/02/2024",
-      title: "Lesion de isquiotibial derecho (desgarro)",
-      report: "lorem ipsum dolor sit amet, consectet ut labore et dolore magna aliqu sapiente vit"
-    },
-    {
-      registerDate: "01/02/2024",
-      title: "Lesion de isquiotibial derecho (desgarro)",
-      report: "lorem ipsum dolor sit amet, consectet ut labore et dolore magna aliqu sapiente vit"
-    },
-    {
-      registerDate: "01/02/2024",
-      title: "Lesion de isquiotibial derecho (desgarro)",
-      report: "lorem ipsum dolor sit amet, consectet ut labore et dolore magna aliqu sapiente vit"
-    }
-  ];
+   columnsTableStats:string[] = 
+  ['registerDate','matches','minutes','scores','assists','yellowCards','redCards','actions'];
 
-  datainitStats:any[] = [
-    {
-      registerDate: "01/02/2024",
-      matches: 1,
-      minutes: 65,
-      scores: 2,
-      assists: 0,
-      yellowCards: 1,
-      redCards: 0
-    },
-    {
-      registerDate: "08/02/2024",
-      matches: 1,
-      minutes: 45,
-      scores: 1,
-      assists: 1,
-      yellowCards: 0,
-      redCards: 0
-    },
-    {
-      registerDate: "15/02/2024",
-      matches: 1,
-      minutes: 55,
-      scores: 0,
-      assists: 2,
-      yellowCards: 1,
-      redCards: 0
-    },
-    {
-      registerDate: "22/02/2024",
-      matches: 2,
-      minutes: 88,
-      scores: 1,
-      assists: 0,
-      yellowCards: 0,
-      redCards: 0
-    },
-    {
-      registerDate: "29/02/2024",
-      matches: 2,
-      minutes: 88,
-      scores: 1,
-      assists: 0,
-      yellowCards: 0,
-      redCards: 0
-    },
-    {
-      registerDate: "06/03/2024",
-      matches: 2,
-      minutes: 88,
-      scores: 1,
-      assists: 0,
-      yellowCards: 0,
-      redCards: 0
-    },
-    {
-      registerDate: "13/03/2024",
-      matches: 2,
-      minutes: 88,
-      scores: 1,
-      assists: 0,
-      yellowCards: 0,
-      redCards: 0
-    }
-  ];
+  columnsTableHistoryClinicc:string[] = ['dateRegister','title','actions'];
+  
+  datainitHistoryClinic:ClinicHistory[] = [];
+  datainitStats:Stat[] = [];
 
   dataHistoryClinicPlayerList = new MatTableDataSource(this.datainitHistoryClinic);
   @ViewChild('paginatorHc', {static: false})tablePaginationCH!:MatPaginator;
@@ -137,32 +49,46 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   dataStatsPlayerList = new MatTableDataSource(this.datainitStats);
   @ViewChild('paginatorStats', {static: false})tablePaginationST!:MatPaginator;
 
-  actionResult:boolean = false;
-  playerSearched:string = 'brianfreijomil';
+  playerSearched:string = '';
+
+  playerProfile: Player | undefined;
 
   constructor(
     private dialog: MatDialog, 
     private router:Router, 
-    private routeActivated:ActivatedRoute) {
+    private routeActivated:ActivatedRoute,
+    private statsService:StatsService,
+    private clinicHistoryService:ClinicHistoryService,
+    private playerService:PlayerService,
+  ) 
+  {
+      //get value of param, from path
+      this.playerSearched = String(this.routeActivated.snapshot.paramMap.get('fullname'));
 
-      this.playerSearched = String(this.routeActivated.snapshot.paramMap.get('id'));
+  }
 
+  getFullName() {
+    return `${this.playerProfile?.surname} ${this.playerProfile?.name}`.trim();
   }
 
   updatePhotoPlayer() {
     this.dialog.open(ModalEditPhotoComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result === 'true') {
+        //do something...
+      }
     });
   }
 
-  updatePlayer(any:any) {
+  updatePlayer() {
     this.dialog.open(ModalEditPlayerComponent, {
       disableClose:true,
-      data: any
+      data: this.playerProfile
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result) {
+        this.playerProfile = result;
+      }
     });
   }
 
@@ -170,23 +96,29 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.dialog.open(ModalStatsComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result) {
+        this.dataStatsPlayerList.data.push(result);
+      }
     });
   }
 
-  updateStats(any:any) {
+  updateStats(stat:Stat) {
     this.dialog.open(ModalStatsComponent, {
       disableClose:true,
-      data: any
+      data: stat
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result) {
+        this.dataStatsPlayerList.data = 
+        this.dataStatsPlayerList.data.filter(c => c.id != stat.id);
+        this.dataStatsPlayerList.data.push(result);
+      }
     });
   }
 
-  deleteStats(user:any) {
+  deleteStats(stat:Stat) {
     Swal.fire({
       title: '¿Desea eliminar el registro de esta fecha?',
-      text: "12/02/2024",
+      text: stat.dateRegister.getDate.name,
       icon: "warning",
       confirmButtonColor: '#313030',
       confirmButtonText: "Si, eliminar registro",
@@ -195,8 +127,20 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       cancelButtonText: "No, cancelar"
     }).then((result) => {
       if(result.isConfirmed) {
-        this.resultAction = true;
-        //logica
+        this.statsService.delete(stat.id).subscribe({
+          next: (data) => {
+            if(data.status === 'OK') {
+              this.dataStatsPlayerList.data = 
+              this.dataStatsPlayerList.data.filter(c => c.id != stat.id);
+            } 
+            else {
+              console.log(data.status);
+            }
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       }
     })
   }
@@ -205,23 +149,29 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.dialog.open(ModalClinicHistoryComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result === 'true') {
+        this.dataHistoryClinicPlayerList.data.push(result);
+      }
     });
   }
 
-  updateHistoryClinic(any:any) {
+  updateHistoryClinic(clinicHistory:ClinicHistory) {
     this.dialog.open(ModalClinicHistoryComponent, {
       disableClose:true,
-      data: any
+      data: clinicHistory
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result === 'true') {
+        this.dataHistoryClinicPlayerList.data = 
+        this.dataHistoryClinicPlayerList.data.filter(c => c.id != clinicHistory.id);
+        this.dataHistoryClinicPlayerList.data.push(result);
+      }
     });
   }
 
-  deleteHistoryClinic(any:any) {
+  deleteHistoryClinic(clinicHistory:ClinicHistory) {
     Swal.fire({
       title: '¿Desea eliminar este registro clinico?',
-      text: "Lesion de isquiotibial...",
+      text: clinicHistory.title,
       icon: "warning",
       confirmButtonColor: '#313030',
       confirmButtonText: "Si, eliminar registro",
@@ -230,26 +180,53 @@ export class ProfileComponent implements OnInit, AfterViewInit {
       cancelButtonText: "No, cancelar"
     }).then((result) => {
       if(result.isConfirmed) {
-        this.resultAction = true;
-        //logica
+        this.clinicHistoryService.delete(clinicHistory.id).subscribe({
+          next: (data) => {
+            if(data.status === 'OK') {
+              this.dataHistoryClinicPlayerList.data = 
+              this.dataHistoryClinicPlayerList.data.filter(c => c.id != clinicHistory.id);
+            }
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       }
     })
   }
 
-  viewHistoryClinic(any:any) {
-    console.log("funca")
+  viewHistoryClinic(clinicReport:ClinicHistory) {
     this.dialog.open(ModalViewClinicHistoryComponent, {
       disableClose:true,
-      data: any
+      data: clinicReport
     }).afterClosed().subscribe(result => {
-      if(result == "true") this.resultAction = true;
+      if(result === 'true') {
+        //do something...
+      }
     });
   }
 
+  getPlayerByFullName(fullName:string) {
+    this.playerService.getPlayerByCompleteName(fullName).subscribe({
+      next: (data) => {
+        if(data.status === 'OK') {
+          this.playerProfile = data.body;
+        }
+        else if(data.status === 'BAD_REQUEST') {
+          this.router.navigate(['']);
+        }
+        else {
+          console.log(data.status);
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
   ngOnInit(): void {
-    if(this.playerSearched != 'brianfreijomil') {
-      this.router.navigate(['']);
-    }
+    this.getPlayerByFullName(this.playerSearched);
   }
 
   ngAfterViewInit(): void {

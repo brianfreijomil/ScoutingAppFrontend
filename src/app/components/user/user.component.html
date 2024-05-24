@@ -43,10 +43,10 @@
                                         </button>
                                     </td>
                                 </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="columnsTable"></tr>
-                                <tr mat-row *matRowDef="let row; columns:columnsTable;"></tr>
+                                <tr mat-header-row *matHeaderRowDef="columnsUserTable"></tr>
+                                <tr mat-row *matRowDef="let row; columns:columnsUserTable;"></tr>
                             </table>
-                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                            <mat-paginator #paginatorUsers [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
                             </mat-paginator>
                         </div>
                     </div>

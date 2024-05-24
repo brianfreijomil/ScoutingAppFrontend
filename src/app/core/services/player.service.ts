@@ -16,12 +16,17 @@ export class PlayerService {
 
   //get list of players by team id
   getAllPlayersByTeam(teamId:number):Observable<ResponseApi> {
-    return this.http.get<ResponseApi>(`${this.urlApi}/by-team?team_id=${teamId}`);
+    return this.http.get<ResponseApi>(`${this.urlApi}/by_team?team_id=${teamId}`);
   }
 
   //get player by id
-  getPlayer(id:number):Observable<ResponseApi> {
+  getPlayerById(id:number):Observable<ResponseApi> {
     return this.http.get<ResponseApi>(`${this.urlApi}/${id}`);
+  }
+
+  //get player by complete name
+  getPlayerByCompleteName(fullName:string):Observable<ResponseApi> {
+    return this.http.get<ResponseApi>(`${this.urlApi}/by_fullname?full_name=${fullName}`);
   }
 
   //Save player

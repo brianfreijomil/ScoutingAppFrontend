@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SharedModule } from '../../reusable/shared.module';
+import { ClinicHistory } from '../../../interfaces/clinic-history';
 
 @Component({
   selector: 'app-modal-view-clinic-history',
@@ -15,9 +16,11 @@ export class ModalViewClinicHistoryComponent {
 
   fechaPredeterminada:string = Date.now().toString();
 
-  @Inject(MAT_DIALOG_DATA) public clinicHistoryData:any;
-
-  constructor(private modalCurrent: MatDialogRef<ModalViewClinicHistoryComponent>) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public clinicHistoryData:ClinicHistory,
+    private modalCurrent: MatDialogRef<ModalViewClinicHistoryComponent>
+  ) 
+  {
   }
 
 }

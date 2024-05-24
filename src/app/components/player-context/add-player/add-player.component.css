@@ -129,11 +129,29 @@ h2.title-section {
 }
 
 .btns-form-add-player-cont {
+    position: relative;
     width: 50%;
     height: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.btns-form-add-player-cont p {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+
+.btns-form-add-player-cont p.inputs-empties {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -30%;
+    left: 0;
+    color: #fe0000;
+    font-size: 1vw;
+    font-weight: 600;
 }
 
 .btns-form-add-player-cont button {

@@ -21,7 +21,7 @@
             <label for="inputReport">Reporte*</label>
             <textarea id="inputReport"></textarea>
             <div class="form-buttons-cont">
-                <button mat-dialog-close class="btn-form btn-confirm">{{btnAction}}</button>
+                <button mat-dialog-close class="btn-form btn-confirm" (click)="createUpdateClinicReport()">{{btnAction}}</button>
                 <button mat-dialog-close class="btn-form btn-cancel">Cancelar</button>
             </div>
         </form>

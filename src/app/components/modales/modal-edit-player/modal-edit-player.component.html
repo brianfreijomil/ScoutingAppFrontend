@@ -18,8 +18,8 @@
                 <input id="inputSurnmae" type="text">
                 <label for="inputName">Nombre*</label>
                 <input id="inputName" type="text">
-                <label for="inputDNI">Dni*</label>
-                <input id="inputDNI" type="text">
+                <label for="inputDNI">Dni</label>
+                <input id="inputDNI" type="text" readonly>
                 <label for="inputCategory">Categoria*</label>
                 <input id="inputCategory" type="text">
                 <label for="inputHeight">Altura</label>
@@ -60,7 +60,7 @@
                 <input id="inputContactTeam" type="text">
             </div>
             <div class="form-part form-part-4">
-                <button mat-dialog-close class="btn-form btn-confirm">{{btnAction}}</button>
+                <button mat-dialog-close class="btn-form btn-confirm" [disabled]="formPlayer.invalid" (click)="createUpdatePlayer()">{{btnAction}}</button>
                 <button mat-dialog-close class="btn-form btn-cancel">Cancelar</button>
             </div>
         </form>

@@ -75,7 +75,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
     this.dialog.open(ModalTeamComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result === "true") {
+      if(result === 'true') {
         this.getTeams();
       }
     });
@@ -105,11 +105,11 @@ export class TeamComponent implements OnInit, AfterViewInit {
         this.teamService.delete(team.id).subscribe({
           next:(data) => {
             if(data.status === 'OK') {
-              this.utilityService.showAlert("The team was deleted", "Ready!");
+              this.utilityService.showAlert("El equipo fue eliminado", "Listo!");
               this.getTeams();
             }
             else {
-              this.utilityService.showAlert("Could not delete team", "Error!");
+              this.utilityService.showAlert("No se pudo eliminar el equipo", "Error!");
             }
           },
           error: (err) => {

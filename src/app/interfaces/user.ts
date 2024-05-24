@@ -1,13 +1,11 @@
-import { Role } from "./role"
-
 export interface User {
-    id:number,
+    id:string,
     username:string,
     email:string,
     lastName:string,
     firstName:string,
     password?:string,
-    roles?:Role[],
+    roles?:string[],
     enabled: boolean,
     teamId:number
 }

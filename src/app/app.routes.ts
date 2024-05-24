@@ -55,7 +55,7 @@ export const routes: Routes = [
         loadChildren: () => import("./components/player-context/player.routes").then(m => m.PLAYER_ROUTES)
     },
     {
-        path: ':id/profile',
+        path: ':fullname/profile',
         canActivate: [authGuard],
         component: ProfileComponent,
         pathMatch: 'full'

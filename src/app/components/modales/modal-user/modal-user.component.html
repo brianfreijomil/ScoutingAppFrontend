@@ -9,22 +9,37 @@
         <form [formGroup]="formUser">
 
             <label for="">Nombre de usuario</label>
-            <input type="text">
+            <input [readonly]="actionIsUpdate" type="text" formControlName="username">
+
+            <label for="">Email</label>
+            <input type="text" formControlName="email">
+
+            <label for="">Apellido</label>
+            <input type="text" formControlName="lastName">
+
+            <label for="">Nombre</label>
+            <input type="text" formControlName="firstName">
 
             <label for="">Contraseña</label>
-            <input type="password">
+            <input type="password" formControlName="password">
 
             <label for="">Confirmar contraseña</label>
             <input type="password">
-
-            <label for="">Rol</label>
-            <select name="" id="">
-                <option value="Administrador">Administrador</option>
-                <option value="Captador">Captador</option>
-            </select>
+            @if(!actionIsUpdate) {
+                <label for="">Rol</label>
+                <select name="" id="" formControlName="role">
+                    <option value="ADMIN">Administrador</option>
+                    <option value="USER">Captador</option>
+                </select>
+            }
 
             <div class="btns-form-user">
-                <button class="btn-confirm-user" mat-dialog-close [disabled]="formUser.invalid">{{btnAction}}</button>
+                <button 
+                    class="btn-confirm-user" 
+                    mat-dialog-close [disabled]="formUser.invalid" 
+                    (click)="createUpdateUser()">
+                {{btnAction}}
+                </button>
                 <button class="btn-cancel-user" mat-dialog-close>Cancelar</button>
             </div>
 

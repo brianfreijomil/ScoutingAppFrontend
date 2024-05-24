@@ -1,30 +1,32 @@
 <mat-dialog-content class="modal-player-confirm-cont">
         <div class="modal-grid-container">
             <div class="item1-modal item-modal">
-                <img class="img-player-uploaded-modal" src="/assets/images/Inferiores-River-vs-Arg.jpg" alt="img-player-uploaded">
+                <img class="img-player-uploaded-modal" [src]="player?.urlImage" alt="img-player-uploaded">
             </div>
             <div class="item2-modal item-modal">
                 <div class="data-important-modal">
                     <div class="info-player-modal info-modal">
                         <ul>
-                            <li>Apellido : <b>Fernandez</b></li>
-                            <li>Nombre : <b>Fernando</b></li>
-                            <li>Categoria : <b>2016</b></li>
-                            <li>Contacto : <b>2494222222</b></li>
-                            <li>Documento : <b>50555000</b></li>
-                            <li>Puesto principal : <b>Delantero centro</b></li>
-                            <li>Puesto secundario : <b>Volante izquierdo</b></li>
+                            <li>Apellido : <b>{{player?.surname}}</b></li>
+                            <li>Nombre : <b>{{player?.name}}</b></li>
+                            <li>Categoria : <b>{{player?.category}}</b></li>
+                            <li>Contacto : <b>{{player?.contact}}</b></li>
+                            <li>Documento : <b>{{player?.dni}}</b></li>
+                            <li>Puesto principal : <b>{{player?.firstPosition}}</b></li>
+                            <li>Puesto secundario : <b>{{player?.secondPosition === undefined ? 'ninguno':player?.secondPosition}}</b></li>
                         </ul>
                     </div>
                     <div class="info-visory-modal info-modal">
                         <ul>
-                            <li>Fecha : <b>Fernandez</b></li>
-                            <li>Hora : <b>Fernando</b></li>
-                            <li>Division/Categoria : <b>2016</b></li>
-                            <li>Ubicacion : <b>2494222222</b></li>
-                            <li>Club : <b>50555000</b></li>
-                            <li>Cancha : <b>Delantero centro</b></li>
-                            <li>Contacto : <b>Volante izquierdo</b></li>
+                            <li>Fecha : <b>{{player?.dateSeen}}</b></li>
+                            @if(player?.timeSeen !== undefined) {
+                                <li>Hora : <b>{{player?.timeSeen}}</b></li>
+                            }
+                            <li>Division/Categoria : <b>{{player?.divisionSeen}}</b></li>
+                            <li>Ubicacion : <b>{{player?.ubication}}</b></li>
+                            <li>Club : <b>{{player?.teamSeen}}</b></li>
+                            <li>Cancha : <b>{{player?.campSeen}}</b></li>
+                            <li>Contacto : <b>{{player?.contact}}</b></li>
                         </ul>
                     </div>
                 </div>
@@ -32,14 +34,13 @@
             <div class="item3-modal item-modal">
                 <div class="caract-player-modal">
                     <h2>Caracteristicas</h2>
-                    <p>1.90 altura, rubio, delgado, habilidoso con las dos piernas, gran vision de juego, va bien de arriba.
-                        1.90 altura, rubio, delgado, habilidoso con las dos piernas, gran vision de juego, va bien de arriba   
+                    <p>{{player?.characteristics === undefined ? 'Sin caracteristicas especificadas.' : player?.characteristics}}
                     </p>
                 </div>
             </div>
             <div class="item4-modal item-modal">
                 <div class="btns-modal">
-                    <button mat-dialog-close class="btn-confirm btn-modal">Confirmar jugador</button>
+                    <button mat-dialog-close class="btn-confirm btn-modal" (click)="createPlayer()">Confirmar jugador</button>
                     <button mat-dialog-close class="btn-cancel btn-modal">Cancelar</button>
                 </div>
             </div>

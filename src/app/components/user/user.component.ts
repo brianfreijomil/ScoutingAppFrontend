@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../reusable/shared.module';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { ModalUserComponent } from '../modales/modal-user/modal-user.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { HeaderComponent } from '../reusable/header/header.component';
 import { MenuPageComponent } from '../reusable/menu-page/menu-page.component';
 import { UserService } from '../../core/services/user.service';
-import { HttpStatusCode } from '@angular/common/http';
 import { User } from '../../interfaces/user';
 import { UtilityService } from '../../core/services/utility.service';
 import { KeycloakService } from '../../core/services/keycloak/keycloak.service';
@@ -22,12 +21,9 @@ import { KeycloakService } from '../../core/services/keycloak/keycloak.service';
 })
 export class UserComponent implements OnInit, AfterViewInit {
 
-  columnsTable:string[] = ['username','email','enabled','actions'];
-  datainit:User[] = [];
-  dataUserList = new MatTableDataSource(this.datainit);
-  @ViewChild(MatPaginator)tablePagination!:MatPaginator;
-  resultAction:boolean = false;
-
+  columnsUserTable:string[] = ['username','email','enabled','actions'];
+  dataUserList = new MatTableDataSource<User>([])
+  @ViewChild('paginatorUsers', {static: false})tablePagination!:MatPaginator;
 
   constructor(
     private dialog: MatDialog, 
@@ -60,6 +56,7 @@ export class UserComponent implements OnInit, AfterViewInit {
         this.userService.getAllByTeamId(teamId).subscribe({
           next:(data) => {
             if(data.status === 'OK') {
+              console.log(data.body)
               this.dataUserList = data.body;
             }
             else
@@ -73,27 +70,27 @@ export class UserComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getUserByUsername() {
-    this.userService.getByUsername('pepe').subscribe({
-      next: (data) => {
-        if(data.status === 'OK') {
-          console.log(data.body);
-        }
-        else {
-          console.log(""+data.message+", "+ data.status);
-        }
-      },
-      error:(err) => {
-        console.log(err);
-      }
-    });
-  }
+  // getUserByUsername(user:User) {
+  //   this.userService.getByUsername(user.username).subscribe({
+  //     next: (data) => {
+  //       if(data.status === 'OK') {
+  //         console.log(data.body);
+  //       }
+  //       else {
+  //         console.log(""+data.message+", "+ data.status);
+  //       }
+  //     },
+  //     error:(err) => {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
 
   createUser() {
     this.dialog.open(ModalUserComponent, {
       disableClose:true
     }).afterClosed().subscribe(result => {
-      if(result === "true") {
+      if(result === 'true') {
         this.getUsers();
       }
     });
@@ -104,16 +101,14 @@ export class UserComponent implements OnInit, AfterViewInit {
       disableClose:true,
       data: user
     }).afterClosed().subscribe(result => {
-      if(result === "true") {
-        this.getUsers();
-      }
+      if(result === 'true') this.getUsers();
     });
   }
 
-  deleteUser(user:any) {
+  deleteUser(user:User) {
     Swal.fire({
       title: '¿Usted desea eliminar este usuario?',
-      text: "pepeMujica",
+      text: user.username,
       icon: "warning",
       confirmButtonColor: '#313030',
       confirmButtonText: "Si, eliminar usuario",
@@ -122,39 +117,52 @@ export class UserComponent implements OnInit, AfterViewInit {
       cancelButtonText: "No, cancelar"
     }).then((result) => {
       if(result.isConfirmed) {
-        this.resultAction = true;
-        // this.userService.delete(user.idUser).subscribe({
-        //   next:(data) => {
-        //     if(data.status) {
-        //       this.utilityService.showAlert("The user was deleted", "Ready!");
-        //       this.getUsers();
-        //     }
-        //     else {
-        //       this.utilityService.showAlert("Could not delete user", "Error!");
-        //     }
-        //   },
-        //   error: (err) => {}
-        // })
+        this.userService.delete(user.id).subscribe({
+          next:(data) => {
+            if(data.status === 'OK') {
+              this.utilityService.showAlert("El usuario fue eliminado", "Listo!");
+              this.getUsers();
+            }
+            else {
+              this.utilityService.showAlert("No se pudo eliminar el usuario", "Error!");
+            }
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        })
       }
     })
   }
 
-  setStatusUser(user:any) {
-    Swal.fire({
-      title: '¿Usted desea inhabilitar este usuario?',
-      text: "brianFreijomil",
-      icon: "warning",
-      confirmButtonColor: '#313030',
-      confirmButtonText: "Si, inhabilitar usuario",
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-      cancelButtonText: "No, cancelar"
-    }).then((result) => {
-      if(result.isConfirmed) {
-        this.resultAction = true;
-        //logica de inhabilitacion/habilitacion de usuario
-      }
-    })
+  setStatusUser(user:User) {
+    // Swal.fire({
+    //   title: '¿Usted desea inhabilitar este usuario?',
+    //   text: user.username,
+    //   icon: "warning",
+    //   confirmButtonColor: '#313030',
+    //   confirmButtonText: "Si, inhabilitar usuario",
+    //   showCancelButton: true,
+    //   cancelButtonColor: '#d33',
+    //   cancelButtonText: "No, cancelar"
+    // }).then((result) => {
+    //   if(result.isConfirmed) {
+    //     this.userService.updateStatusUser(user.id).subscribe({
+    //       next:(data) => {
+    //         if(data.status === 'OK') {
+    //           this.utilityService.showAlert("El usuario fue inhabilitado", "Listo!");
+    //           this.getUsers();
+    //         }
+    //         else {
+    //           this.utilityService.showAlert("No se pudo inhabilitar el usuario", "Error!");
+    //         }
+    //       },
+    //       error: (err) => {
+    //         console.log(err);
+    //       }
+    //     });
+    //   }
+    // })
   }
 
   ngOnInit(): void {

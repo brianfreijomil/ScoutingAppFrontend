@@ -7,8 +7,8 @@
                 <div class="scroll-cont">
                         <!-- sub header -->
                     <article class="sub-header">
-                        <h2>Tomas Ezequiel Echeverri</h2>
-                        <button (click)="updatePlayer($event)">+ Editar jugador</button>
+                        <h2>{{ getFullName() }}</h2>
+                        <button (click)="updatePlayer()">+ Editar jugador</button>
                     </article>
                     <!-- ---------------SECTIONS--------------- -->
                     <div class="sections-container">
@@ -16,7 +16,7 @@
         
                         <section class="section-profile data-player-cont">
                             <div class="img-profile-cont data-player-part">
-                                <img src="/assets/images/Inferiores-River-vs-Arg.jpg" alt="img-player-svg">
+                                <img [src]="playerProfile?.urlImage" alt="img-player-svg">
                                 <div class="overlay-photo"></div>
                                 <div class="btn-edit-photo" (click)="updatePhotoPlayer()">
                                     <p>Actualizar foto</p>
@@ -26,27 +26,27 @@
                                 <article class="info-sub-part">
                                     <h4>DATOS PERSONALES Y DEPORTIVOS</h4>
                                     <ul>
-                                        <li>Documento : <b>50432234</b></li>
-                                        <li>Ubicacion : <b>Tandil, Bs As.</b></li>
-                                        <li>Altura : <b>1.80</b></li>
-                                        <li>Pie habil : <b>izqquierdo</b></li>
-                                        <li>Categoria : <b>2016</b></li>
-                                        <li>Puesto principal : <b>Extremo izq</b></li>
-                                        <li>Puesto secundario : <b>Delantero centro</b></li>
-                                        <li>Valoracion : <b>A</b></li>
-                                        <li>Contacto : <b>2494992211</b></li>
+                                        <li>Documento : <b>{{playerProfile?.dni}}</b></li>
+                                        <li>Ubicacion : <b>{{playerProfile?.ubication}}</b></li>
+                                        <li>Altura : <b>{{playerProfile?.height}}</b></li>
+                                        <li>Pie habil : <b>{{playerProfile?.skillLeg}}</b></li>
+                                        <li>Categoria : <b>{{playerProfile?.category}}</b></li>
+                                        <li>Puesto principal : <b>{{playerProfile?.firstPosition}}</b></li>
+                                        <li>Puesto secundario : <b>{{playerProfile?.secondPosition}}</b></li>
+                                        <li>Valoracion : <b>{{playerProfile?.valoration}}</b></li>
+                                        <li>Contacto : <b>{{playerProfile?.contact}}</b></li>
                                     </ul>
                                 </article>
                                 <article class="info-sub-part">
                                     <h4>DATOS DE VISORIA</h4>
                                     <ul>
-                                        <li>Fecha : <b>18/01/2024</b></li>
-                                        <li>Horario : <b>16:30:00</b></li>
-                                        <li>Division : <b>2016</b></li>
-                                        <li>Club : <b>Gimnasia y Esgrima de Tandil</b></li>
-                                        <li>Cancha : <b>Predio Jorge Ibañez</b></li>
-                                        <li>Contacto : <b>2494553344</b></li>
-                                        <li>Captador : <b>Jorge Gonzales</b></li>
+                                        <li>Fecha : <b>{{playerProfile?.dateSeen}}</b></li>
+                                        <li>Horario : <b>{{playerProfile?.timeSeen}}</b></li>
+                                        <li>Division : <b>{{playerProfile?.divisionSeen}}</b></li>
+                                        <li>Club : <b>{{playerProfile?.teamSeen}}</b></li>
+                                        <li>Cancha : <b>{{playerProfile?.campSeen}}</b></li>
+                                        <li>Contacto : <b>{{playerProfile?.contactTeamSeen}}</b></li>
+                                        <li>Captador : <b>{{playerProfile?.scouter?.surname}} {{playerProfile?.scouter?.name}}</b></li>
                                     </ul>
                                 </article>
                             </div>
@@ -68,9 +68,9 @@
                                 <div class="mat-elevation-z2 table-cont">
                                     <table mat-table [dataSource]="dataStatsPlayerList">
                                         
-                                        <ng-container matColumnDef="registerDate">
+                                        <ng-container matColumnDef="dateRegister">
                                             <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Fecha</th>
-                                            <td mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.registerDate}}</td>
+                                            <td mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.dateRegister}}</td>
                                         </ng-container>
                         
                                         <ng-container matColumnDef="matches">
@@ -140,12 +140,12 @@
                                         
                                         <ng-container matColumnDef="registerDate">
                                             <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Fecha</th>
-                                            <td class="td-clinic-history" (click)="viewHistoryClinic($event)" mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.registerDate}}</td>
+                                            <td class="td-clinic-history" (click)="viewHistoryClinic(element)" mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.registerDate}}</td>
                                         </ng-container>
                         
                                         <ng-container matColumnDef="title">
                                             <th mat-header-cell *matHeaderCellDef style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center; background-color: #dcdcdc;">Titulo</th>
-                                            <td class="td-clinic-history" (click)="viewHistoryClinic($event)" mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.title}}</td>
+                                            <td class="td-clinic-history" (click)="viewHistoryClinic(element)" mat-cell *matCellDef="let element" style="font-size: 1.1vw; padding: 0 0.5vw 0 0.5vw; text-align: center;">{{element.title}}</td>
                                         </ng-container>
                         
                                         <ng-container matColumnDef="actions">
