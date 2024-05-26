@@ -133,19 +133,36 @@ export class ModalEventCalendarComponent implements OnInit {
 
   setFormateDate(d1:string, d2:string):string {
 
-    const date1 = new Date(d1);
-    const month1 = date1.getMonth();
-    const day1 = date1.getDate() + 1;
-    const year1 = date1.getFullYear() + 1;
+    // Crear objetos Date a partir de los strings de entrada
+    const date1 = this.createDateFromString(d1);
+    const date2 = this.createDateFromString(d2);
 
-    const date2 = new Date(d2);
-    const month2 = date2.getMonth();
-    const day2 = date2.getDate() + 1;
-    const year2 = date2.getFullYear() + 1;
-    //devuelve a todos menos uno
-    return '' + this.getMonthName(month1) + ', ' + day1 + ', ' + year1 + ' - ' + 
-    this.getMonthName(month2) + ', ' + day2 + ', ' + year2
+    // Obtener día, mes y año de las fechas
+    const day1 = date1.getDate();
+    const month1 = date1.toLocaleString('default', { month: 'long' });
+    const year1 = date1.getFullYear();
 
+    const day2 = date2.getDate();
+    const month2 = date2.toLocaleString('default', { month: 'long' });
+    const year2 = date2.getFullYear();
+
+    // Verificar si el año es el mismo
+    if (year1 === year2) {
+      // Verificar si el mes es el mismo
+      if (month1 === month2) {
+        return `Desde el ${day1} - hasta el ${day2} de ${month1} de ${year1}`;
+      } else {
+        return `Desde el ${day1} de ${month1} - hasta el ${day2} de ${month2} de ${year1}`;
+      }
+    } else {
+      return `Desde el ${day1} de ${month1} de ${year1} - hasta el ${day2} de ${month2} de ${year2}`;
+    }
+
+  }
+  // Función auxiliar para crear una fecha sin ajustar la zona horaria
+  createDateFromString(dateString: string): Date {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day); // month es 0-indexado
   }
 
   getMonthName(num:number): string {

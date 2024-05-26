@@ -82,10 +82,10 @@ export class ModalEditPlayerComponent implements OnInit {
     }
   }
 
-  createUpdatePlayer() {
+  updatePlayer() {
 
     const player:Player = {
-      dni: this.playerData.dni == null ? 0 : this.playerData.dni,
+      dni: this.playerData.dni,
       surname: this.formPlayer.value.surname,
       name: this.formPlayer.value.name,
       contact:this.formPlayer.value.contact,
@@ -108,26 +108,6 @@ export class ModalEditPlayerComponent implements OnInit {
       status:this.formPlayer.value.status,
       teamId:this.playerData.teamId
     }
-
-    //CREATE PLAYER
-    if(this.playerData == null) {
-      this.playerService.save(player).subscribe({
-        next: (data) => {
-          if(data.status === 'CREATED') {
-            this.utilityService.showAlert("El jugador fue creado", "Exito!");
-            this.modalCurrent.close(player);
-          }
-          else {
-            console.log(data.status);
-            this.utilityService.showAlert("El jugador no pudo ser creado", "Error!");
-          }
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
-    }
-    else {
       //UPDATE PLAYER
       this.playerService.update(player).subscribe({
         next: (data) => {
@@ -144,8 +124,6 @@ export class ModalEditPlayerComponent implements OnInit {
           console.log(err);
         }
       })
-    }
-
   }
 
 }

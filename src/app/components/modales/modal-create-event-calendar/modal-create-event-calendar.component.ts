@@ -60,6 +60,8 @@ export class ModalCreateEventCalendarComponent {
       ]
     }
 
+    console.log(eventToPersist.dateInit);
+
     //persist event in the api
     this.calendarService.save(eventToPersist).subscribe({
       next: (data) => {
