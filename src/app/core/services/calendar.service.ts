@@ -16,7 +16,7 @@ export class CalendarService {
 
   //get All events by team Id
   getAllByTeamId(teamId:number): Observable<ResponseApi> {
-    return this.http.get<ResponseApi>(`${this.urlApi}/${teamId}`);
+    return this.http.get<ResponseApi>(`${this.urlApi}/all-by?team_id=${teamId}`);
   }
 
   //get event by id
@@ -31,12 +31,12 @@ export class CalendarService {
 
   //update event
   update(event:EventCalendar):Observable<ResponseApi> {
-    return this.http.put<ResponseApi>(`${this.urlApi}/&${event.id}`, event);
+    return this.http.put<ResponseApi>(`${this.urlApi}/${event.id}`, event);
   }
 
   //delete event
   delete(id:number):Observable<ResponseApi> {
-    return this.http.delete<ResponseApi>(`${this.urlApi}/&${id}`);
+    return this.http.delete<ResponseApi>(`${this.urlApi}/${id}`);
   }
 
 

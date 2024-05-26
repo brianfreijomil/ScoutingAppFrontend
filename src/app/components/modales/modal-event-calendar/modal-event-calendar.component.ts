@@ -4,7 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ModalEditPlayerComponent } from '../modal-edit-player/modal-edit-player.component';
 import { SharedModule } from '../../reusable/shared.module';
 import { EventClickArg } from '@fullcalendar/core';
-import { createEventId } from '../../calendar/event-utils';
+import { EventCalendar } from '../../../interfaces/event-calendar';
+import { UtilityService } from '../../../core/services/utility.service';
+import { CalendarService } from '../../../core/services/calendar.service';
 
 @Component({
   selector: 'app-modal-event-calendar',
@@ -18,10 +20,9 @@ export class ModalEventCalendarComponent implements OnInit {
   titleAction:string = 'Editar';
   btnAction:string = 'Editar';
   showEventInfo:boolean = true;
-  showEventForm:boolean = false;
   formEvent:FormGroup;
 
-  eventCalendar: any = {
+  eventCalendarToShow: any = {
     title: '',
     date: '',
     description: ''
@@ -34,8 +35,10 @@ export class ModalEventCalendarComponent implements OnInit {
 
   constructor(
     private modalCurrent: MatDialogRef<ModalEventCalendarComponent>,
-    @Inject(MAT_DIALOG_DATA) public eventData:EventClickArg,
-    private fb:FormBuilder
+    @Inject(MAT_DIALOG_DATA) public eventData:any,
+    private fb:FormBuilder,
+    private utilityService:UtilityService,
+    private calendarService:CalendarService
   )
   {
     this.formEvent = this.fb.group({
@@ -46,62 +49,86 @@ export class ModalEventCalendarComponent implements OnInit {
     })
   }
 
-  viewEdit() {
+  viewEditContext() {
     this.showEventInfo = false;
-    this.showEventForm = true;
     this.formEvent.patchValue({
-      title: this.eventCalendar.title,
-      dateInit: this.eventData.event.startStr,
-      dateEnd: this.eventData.event.endStr,
-      description: this.eventData.event._def.extendedProps['description']
+      title: this.eventCalendarToShow.title,
+      dateInit: this.eventData.eventCalendar.event.startStr,
+      dateEnd: this.eventData.eventCalendar.event.endStr,
+      description: this.eventData.eventCalendar.event._def.extendedProps['description']
     });
   }
 
   updateEvent() {
 
-    const calendarApi = this.eventData.view.calendar;
+    const idScouter = this.utilityService.getUserProfile().id!;
+    const surnameScouter = this.utilityService.getUserProfile().lastName!;
+    const nameScouter = this.utilityService.getUserProfile().firstName!;
 
-    calendarApi.unselect(); // clear date selection
-
-    if (this.eventCalendar.title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title: this.formEvent.value.title,
-        start: this.formEvent.value.dateInit,
-        end: this.formEvent.value.dateEnd,
-        allDay: this.eventData.event.allDay,
-        backgroundColor: this.getRandomColor(),
-        color: 'black',
-        textColor: 'black',
-        extendedProps: {
-          description: this.formEvent.value.description
-        }
-      });
-      this.eventData.event.remove();
-      this.modalCurrent.close("true");
+    const eventToPersist:EventCalendar = {
+      id: this.eventData.eventApi.id,
+      title: this.formEvent.value.title,
+      dateInit: this.formEvent.value.dateInit,
+      dateEnd: this.formEvent.value.dateEnd,
+      description: this.formEvent.value.description,
+      teamId: parseInt(this.utilityService.getUserTeamId()),
+      scouters: this.eventData.eventApi.scouters
     }
-  }
 
-  //genero un color random
-  getRandomColor(): string {
-    const coloresHex: string[] = [
-      '#f7e8a0', // rgb(247, 232, 160)
-      '#b4fcae', // rgb(180, 252, 174)
-      '#cbfd86', // rgb(203, 253, 134)
-      '#a0fbea', // rgb(160, 251, 234)
-      '#d99afe', // rgb(217, 154, 254)
-      '#e8a3d1', // rgb(232, 163, 209)
-      '#1dc355', // rgb(29, 195, 81)
-      '#fe7f9d', // rgb(254, 127, 157)
-      '#d1e811'  // rgb(209, 232, 17)
-    ];
-  
-    return coloresHex[Math.floor(Math.random() * coloresHex.length)];
+    this.calendarService.update(eventToPersist).subscribe({
+      next: (data) => {
+        if(data.status === 'ACCEPTED') {
+
+          const calendarApi = this.eventData.eventCalendar.view.calendar;
+          calendarApi.unselect(); // clear date selection
+
+          if (this.eventCalendarToShow.title) {
+            calendarApi.addEvent({
+              id: String(this.eventData.eventApi.id),
+              title: this.formEvent.value.title,
+              start: this.formEvent.value.dateInit,
+              end: this.formEvent.value.dateEnd,
+              allDay: this.eventData.eventCalendar.event.allDay,
+              backgroundColor: this.utilityService.getRandomColor(),
+              color: 'black',
+              textColor: 'black',
+              extendedProps: {
+                description: this.formEvent.value.description
+              }
+            });
+            this.eventData.eventCalendar.event.remove();
+          }
+          this.modalCurrent.close('UPDATED');
+        }
+        else {
+          console.log(data.status);
+          this.modalCurrent.close('ERROR');
+        }
+      },
+      error: (data) => {
+        console.log(data);
+      }
+    })
   }
 
   deleteEvent() {
-    this.eventData.event.remove();
-    this.modalCurrent.close();
+
+    this.calendarService.delete(this.eventData.eventApi.id).subscribe({
+      next: (data) => {
+        if(data.status === 'OK') {
+          this.eventData.eventCalendar.event.remove();
+          this.modalCurrent.close('DELETED');
+        }
+        else {
+          console.log(data.status);
+          this.modalCurrent.close('ERROR');
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+
   }
 
   setFormateDate(d1:string, d2:string):string {
@@ -128,11 +155,11 @@ export class ModalEventCalendarComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.eventData != null) {
-      this.eventCalendar = {
-        title: this.eventData.event.title,
-        date: this.setFormateDate(this.eventData.event.startStr, this.eventData.event.endStr),
-        description: this.eventData.event._def.extendedProps['description']
-      }
+      this.eventCalendarToShow = {
+        title: this.eventData.eventCalendar.event.title,
+        date: this.setFormateDate(this.eventData.eventCalendar.event.startStr, this.eventData.eventCalendar.event.endStr),
+        description: this.eventData.eventCalendar.event._def.extendedProps['description']
+      };
     }
   }
 

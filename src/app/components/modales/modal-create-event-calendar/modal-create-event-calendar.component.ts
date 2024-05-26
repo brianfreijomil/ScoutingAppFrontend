@@ -3,7 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DateSelectArg } from '@fullcalendar/core';
 import { SharedModule } from '../../reusable/shared.module';
-import { createEventId } from '../../calendar/event-utils';
+import { UtilityService } from '../../../core/services/utility.service';
+import { CalendarService } from '../../../core/services/calendar.service';
+import { Scouter } from '../../../interfaces/scouter';
+import { EventCalendar } from '../../../interfaces/event-calendar';
 
 @Component({
   selector: 'app-modal-create-event-calendar',
@@ -17,18 +20,14 @@ export class ModalCreateEventCalendarComponent {
   titleAction:string = 'Agregar';
   btnAction:string = 'Agregar';
   formEvent:FormGroup;
-
-  eventCalendar: any = {
-    title: '',
-    dateInit: '',
-    dateEnd: '',
-    description: ''
-  }
+  scouters:Scouter[] = [];
 
   constructor(
     private modalCurrent: MatDialogRef<ModalCreateEventCalendarComponent>,
     @Inject(MAT_DIALOG_DATA) public selectInfo:DateSelectArg,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private utilityService: UtilityService,
+    private calendarService: CalendarService
   )
   {
     this.formEvent = this.fb.group({
@@ -41,52 +40,61 @@ export class ModalCreateEventCalendarComponent {
 
   saveEvent() {
 
-    console.log(this.formEvent.value.dateInit);
+    const idScouter = this.utilityService.getUserProfile().id!;
+    const surnameScouter = this.utilityService.getUserProfile().lastName!;
+    const nameScouter = this.utilityService.getUserProfile().firstName!;
 
-    this.eventCalendar = {
+    const eventToPersist:EventCalendar = {
+      id: 0,
       title: this.formEvent.value.title,
       dateInit: this.formEvent.value.dateInit,
       dateEnd: this.formEvent.value.dateEnd,
-      description: this.formEvent.value.description
-    }
-
-    const calendarApi = this.selectInfo.view.calendar;
-    calendarApi.unselect(); // clear date selection
-
-    if (this.eventCalendar.title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title: this.eventCalendar.title,
-        start: this.eventCalendar.dateInit,
-        end: this.eventCalendar.dateEnd,
-        allDay: this.selectInfo.allDay,
-        backgroundColor: this.getRandomColor(),
-        color: 'black',
-        textColor: 'black',
-        extendedProps: {
-          description: this.eventCalendar.description
+      description: this.formEvent.value.description,
+      teamId: this.utilityService.getUserTeamId(),
+      scouters: [
+        {
+          id: idScouter, 
+          surname: surnameScouter,
+          name: nameScouter
         }
-      });
-      this.modalCurrent.close("true");
+      ]
     }
-  }
 
-  //genero un color random
-  getRandomColor(): string {
-    const coloresHex: string[] = [
-      '#f7e8a0', // rgb(247, 232, 160)
-      '#b4fcae', // rgb(180, 252, 174)
-      '#cbfd86', // rgb(203, 253, 134)
-      '#a0fbea', // rgb(160, 251, 234)
-      '#d99afe', // rgb(217, 154, 254)
-      '#e8a3d1', // rgb(232, 163, 209)
-      '#1dc355', // rgb(29, 195, 81)
-      '#fe7f9d', // rgb(254, 127, 157)
-      '#d1e811'  // rgb(209, 232, 17)
-    ];
-  
-    return coloresHex[Math.floor(Math.random() * coloresHex.length)];
-  }
+    //persist event in the api
+    this.calendarService.save(eventToPersist).subscribe({
+      next: (data) => {
+        if(data.status === 'CREATED') {
+          //persis event in the current calendar
+          const calendarApi = this.selectInfo.view.calendar;
+          calendarApi.unselect(); // clear date selection
 
+          if (eventToPersist.title) {
+            calendarApi.addEvent({
+              id: String(data.body),
+              title: eventToPersist.title,
+              start: eventToPersist.dateInit,
+              end: eventToPersist.dateEnd,
+              allDay: this.selectInfo.allDay,
+              backgroundColor: this.utilityService.getRandomColor(),
+              color: 'black',
+              textColor: 'black',
+              extendedProps: {
+                description: eventToPersist.description
+              }
+            });
+            this.modalCurrent.close('CREATED');
+          }
+        }
+        else {
+          console.log(data.status);
+          this.modalCurrent.close('ERROR');
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+
+  }
 
 }

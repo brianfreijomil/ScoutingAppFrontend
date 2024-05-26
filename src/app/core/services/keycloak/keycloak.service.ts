@@ -8,7 +8,7 @@ import { UserProfile } from "./user-profile";
 export class KeycloakService {
 
   private _keycloak : Keycloak | undefined;
-  private _profile : UserProfile | undefined;
+  private _profile!: UserProfile;
 
   get keycloak() {
     if (!this._keycloak) {
@@ -21,7 +21,7 @@ export class KeycloakService {
     return this._keycloak;
   }
 
-  get profile():UserProfile | undefined {
+  get profile():UserProfile {
     return this._profile;
   }
   
@@ -36,8 +36,6 @@ export class KeycloakService {
     if(authenticated) {
       this._profile = (await this.keycloak?.loadUserProfile()) as UserProfile;
       this._profile.token = this.keycloak?.token;
-      console.log(this.keycloak?.token);
-      console.log(this._profile.token);
     }
   }
 
